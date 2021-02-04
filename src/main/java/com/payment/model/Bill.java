@@ -4,17 +4,14 @@ import java.math.BigDecimal;
 
 public class Bill {
     private Long id;
-    private Long idUser;
-    private BankAccount sender;
-    private BankAccount recipient;
+    private Long senderAccountId;
+    private Long recipientAccountId;
     private BigDecimal amount;
-    private Status status;
+    private Integer status;
 
-    public Bill(Long idUser, BankAccount sender, BankAccount recipient,
-                BigDecimal amount, Status status) {
-        this.idUser = idUser;
-        this.sender = sender;
-        this.recipient = recipient;
+    public Bill(Long senderAccountId, Long recipientAccountId, BigDecimal amount, Integer status) {
+        this.senderAccountId = senderAccountId;
+        this.recipientAccountId = recipientAccountId;
         this.amount = amount;
         this.status = status;
     }
@@ -27,28 +24,20 @@ public class Bill {
         this.id = id;
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public Long getSenderAccountId() {
+        return senderAccountId;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setSenderAccountId(Long senderAccountId) {
+        this.senderAccountId = senderAccountId;
     }
 
-    public BankAccount getSender() {
-        return sender;
+    public Long getRecipientAccountId() {
+        return recipientAccountId;
     }
 
-    public void setSender(BankAccount sender) {
-        this.sender = sender;
-    }
-
-    public BankAccount getRecipient() {
-        return recipient;
-    }
-
-    public void setRecipient(BankAccount recipient) {
-        this.recipient = recipient;
+    public void setRecipientAccountId(Long recipientAccountId) {
+        this.recipientAccountId = recipientAccountId;
     }
 
     public BigDecimal getAmount() {
@@ -59,11 +48,11 @@ public class Bill {
         this.amount = amount;
     }
 
-    public Status getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -71,9 +60,8 @@ public class Bill {
     public String toString() {
         return "Bill{" +
                 "id=" + id +
-                ", idUser=" + idUser +
-                ", sender=" + sender +
-                ", recipient=" + recipient +
+                ", senderAccountId=" + senderAccountId +
+                ", recipientAccountId=" + recipientAccountId +
                 ", amount=" + amount +
                 ", status=" + status +
                 '}';

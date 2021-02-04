@@ -6,20 +6,20 @@ import java.time.YearMonth;
 public class BankAccount {
     private Long id;
     private Long idUser;
-    private BigDecimal number;
+    private String number;
     private BigDecimal balance;
     private YearMonth expiry;
-    private Integer cvv2;
-    private boolean blocked;
+    private String cvv2;
+    private Integer status;
 
-    public BankAccount(Long idUser, BigDecimal number, BigDecimal balance,
-                       YearMonth expiry, Integer cvv2, boolean blocked) {
+    public BankAccount(Long idUser, String number, BigDecimal balance,
+                       YearMonth expiry, String cvv2, Integer status) {
         this.idUser = idUser;
         this.number = number;
         this.balance = balance;
         this.expiry = expiry;
         this.cvv2 = cvv2;
-        this.blocked = blocked;
+        this.status = status;
     }
 
     public Long getId() {
@@ -38,11 +38,11 @@ public class BankAccount {
         this.idUser = idUser;
     }
 
-    public BigDecimal getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(BigDecimal number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
@@ -62,20 +62,20 @@ public class BankAccount {
         this.expiry = expiry;
     }
 
-    public Integer getCvv2() {
+    public String getCvv2() {
         return cvv2;
     }
 
-    public void setCvv2(Integer cvv2) {
+    public void setCvv2(String cvv2) {
         this.cvv2 = cvv2;
     }
 
-    public boolean isBlocked() {
-        return blocked;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setBlocked(boolean blocked) {
-        this.blocked = blocked;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     @Override
@@ -83,11 +83,11 @@ public class BankAccount {
         return "BankAccount{" +
                 "id=" + id +
                 ", idUser=" + idUser +
-                ", number=" + number +
+                ", number='" + number + '\'' +
                 ", balance=" + balance +
                 ", expiry=" + expiry +
-                ", cvv2=" + cvv2 +
-                ", blocked=" + blocked +
+                ", cvv2='" + cvv2 + '\'' +
+                ", status=" + status +
                 '}';
     }
 }
