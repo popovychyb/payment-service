@@ -4,10 +4,6 @@ public class Role {
     private Long id;
     private RoleName roleName;
 
-    public enum RoleName {
-        ADMIN, USER
-    }
-
     private Role(RoleName roleName) {
         this.roleName = roleName;
     }
@@ -38,5 +34,9 @@ public class Role {
                 "id=" + id +
                 ", roleName=" + roleName +
                 '}';
+    }
+
+    public enum RoleName {
+        ADMIN, USER
     }
 }
