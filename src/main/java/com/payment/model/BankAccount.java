@@ -9,15 +9,18 @@ public class BankAccount {
     private String number;
     private BigDecimal balance;
     private YearMonth expiry;
+    private String title;
     private String cvv2;
     private Integer status;
 
     public BankAccount(Long idUser, String number, BigDecimal balance,
-                       YearMonth expiry, String cvv2, Integer status) {
+                       YearMonth expiry, String title, String cvv2,
+                       Integer status) {
         this.idUser = idUser;
         this.number = number;
         this.balance = balance;
         this.expiry = expiry;
+        this.title = title;
         this.cvv2 = cvv2;
         this.status = status;
     }
@@ -62,6 +65,14 @@ public class BankAccount {
         this.expiry = expiry;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getCvv2() {
         return cvv2;
     }
@@ -86,6 +97,7 @@ public class BankAccount {
                 ", number='" + number + '\'' +
                 ", balance=" + balance +
                 ", expiry=" + expiry +
+                ", title='" + title + '\'' +
                 ", cvv2='" + cvv2 + '\'' +
                 ", status=" + status +
                 '}';

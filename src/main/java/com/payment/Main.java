@@ -55,11 +55,11 @@ public class Main {
 
         System.out.println("\n- BankAccount:");
         BankAccount bobAccount = new BankAccount(bob.getId(), "0000111122223333", new BigDecimal("0"),
-                YearMonth.of(2025, 12), "123", 0);
+                YearMonth.of(2025, 12), "main", "123", 0);
         BankAccount bobSecondAccount = new BankAccount(bob.getId(), "9999888877776666", new BigDecimal("0"),
-                YearMonth.of(2024, 6), "000", 0);
+                YearMonth.of(2024, 6), "second", "000", 0);
         BankAccount lisaAccount = new BankAccount(lisa.getId(), "5555666677778888", new BigDecimal("0"),
-                YearMonth.of(2022, 5), "514", 0);
+                YearMonth.of(2022, 5), "salary", "514", 0);
         bankAccountDao.create(bobAccount);
         bankAccountDao.create(bobSecondAccount);
         bankAccountDao.create(lisaAccount);
