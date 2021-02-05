@@ -83,5 +83,17 @@ public class Main {
         bobCart.getBills().add(bobsBill);
         lisaCart.getBills().add(lisaBill);
         shoppingCartDao.getAll().forEach(System.out::println);
+
+        System.out.println("\n- getUserBankAccounts");
+        System.out.println(bankAccountDao.getUserBankAccounts(1L));
+
+        System.out.println("\n- getBillsByAccount");
+        System.out.println(billDao.getBillsByAccount(1L));
+
+        System.out.println("\n- getBillsBySenderAccount");
+        System.out.println(billDao.getBillsBySenderAccount(1L));
+
+        System.out.println("\n- getBillsByRecipientAccount");
+        System.out.println(billDao.getBillsByRecipientAccount(1L));
     }
 }

@@ -6,6 +6,7 @@ import com.payment.model.Bill;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class BillDaoImpl implements BillDao {
@@ -20,6 +21,28 @@ public class BillDaoImpl implements BillDao {
         return getAll().stream()
                 .filter(b -> b.getId().equals(id))
                 .findFirst();
+    }
+
+    @Override
+    public List<Bill> getBillsBySenderAccount(Long id) {
+        return getAll().stream()
+                .filter(b -> b.getSenderAccountId().equals(id))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Bill> getBillsByRecipientAccount(Long id) {
+        return getAll().stream()
+                .filter(b -> b.getRecipientAccountId().equals(id))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Bill> getBillsByAccount(Long id) {
+        return getAll().stream()
+                .filter(b -> b.getSenderAccountId().equals(id)
+                        || b.getRecipientAccountId().equals(id))
+                .collect(Collectors.toList());
     }
 
     @Override

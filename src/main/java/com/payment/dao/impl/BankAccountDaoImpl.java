@@ -6,6 +6,7 @@ import com.payment.model.BankAccount;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class BankAccountDaoImpl implements BankAccountDao {
@@ -20,6 +21,13 @@ public class BankAccountDaoImpl implements BankAccountDao {
         return getAll().stream()
                 .filter(b -> b.getId().equals(id))
                 .findFirst();
+    }
+
+    @Override
+    public List<BankAccount> getUserBankAccounts(Long id) {
+        return getAll().stream()
+                .filter(b -> b.getIdUser().equals(id))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -39,4 +47,5 @@ public class BankAccountDaoImpl implements BankAccountDao {
     public boolean delete(Long id) {
         return Storage.bankAccounts.removeIf(b -> b.getId().equals(id));
     }
+
 }
