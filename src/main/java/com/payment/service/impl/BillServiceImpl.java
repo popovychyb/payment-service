@@ -25,6 +25,7 @@ public class BillServiceImpl implements BillService {
     public List<Bill> getAll() {
         return billDao.getAll();
     }
+
     @Override
     public List<Bill> getBillsBySenderAccount(Long id) {
         return billDao.getBillsBySenderAccount(id);

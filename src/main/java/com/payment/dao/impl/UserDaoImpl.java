@@ -24,19 +24,19 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAll() {
-        return Storage.users;
+        return Storage.USERS;
     }
 
     @Override
     public User update(User user) {
-        IntStream.range(0, Storage.users.size())
-                .filter(i -> Storage.users.get(i).getId().equals(user.getId()))
-                .forEach(i -> Storage.users.set(i, user));
+        IntStream.range(0, Storage.USERS.size())
+                .filter(i -> Storage.USERS.get(i).getId().equals(user.getId()))
+                .forEach(i -> Storage.USERS.set(i, user));
         return user;
     }
 
     @Override
     public boolean delete(Long id) {
-        return Storage.users.removeIf(user -> user.getId().equals(id));
+        return Storage.USERS.removeIf(user -> user.getId().equals(id));
     }
 }

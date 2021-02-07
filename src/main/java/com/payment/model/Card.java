@@ -2,27 +2,45 @@ package com.payment.model;
 
 import java.math.BigDecimal;
 import java.time.YearMonth;
+import java.util.Date;
 
-public class BankAccount {
+import static java.lang.Math.random;
+
+public class Card {
+    private final int cvvBase = 1000;
+    private final int pinBase = 10000;
+    private final String cvvFormat = "%03d";
+    private final String pinFormat = "%04d";
     private Long id;
-    private Long idUser;
     private String number;
+    private Long idUser;
     private BigDecimal balance;
     private YearMonth expiry;
     private String title;
     private String cvv2;
-    private Integer status;
-
-    public BankAccount(Long idUser, String number, BigDecimal balance,
-                       YearMonth expiry, String title, String cvv2,
-                       Integer status) {
-        this.idUser = idUser;
+    private String pinCode;
+    private Long currencyId;
+    private Long blockedBy;
+    private Date createTime;
+    public Card(String number) {
         this.number = number;
-        this.balance = balance;
-        this.expiry = expiry;
+    }
+    public Card(Long idUser, String title, Long currencyId) {
+        this.idUser = idUser;
+        this.balance = new BigDecimal("0");
         this.title = title;
-        this.cvv2 = cvv2;
-        this.status = status;
+        this.cvv2 = String.format(cvvFormat, (int) (random() * cvvBase));
+        this.pinCode = String.format(pinFormat, (int) (random() * pinBase));
+        this.currencyId = currencyId;
+        this.blockedBy = 0L;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Long getId() {
@@ -81,25 +99,43 @@ public class BankAccount {
         this.cvv2 = cvv2;
     }
 
-    public Integer getStatus() {
-        return status;
+    public String getPinCode() {
+        return pinCode;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setPinCode(String pinCode) {
+        this.pinCode = pinCode;
+    }
+
+    public Long getCurrencyId() {
+        return currencyId;
+    }
+
+    public void setCurrencyId(Long currencyId) {
+        this.currencyId = currencyId;
+    }
+
+    public Long getBlockedBy() {
+        return blockedBy;
+    }
+
+    public void setBlockedBy(Long blockedBy) {
+        this.blockedBy = blockedBy;
     }
 
     @Override
     public String toString() {
-        return "BankAccount{" +
+        return "Card{" +
                 "id=" + id +
-                ", idUser=" + idUser +
                 ", number='" + number + '\'' +
+                ", idUser=" + idUser +
                 ", balance=" + balance +
                 ", expiry=" + expiry +
                 ", title='" + title + '\'' +
                 ", cvv2='" + cvv2 + '\'' +
-                ", status=" + status +
+                ", pinCode='" + pinCode + '\'' +
+                ", currencyId=" + currencyId +
+                ", blockedBy=" + blockedBy +
                 '}';
     }
 }

@@ -47,19 +47,19 @@ public class BillDaoImpl implements BillDao {
 
     @Override
     public List<Bill> getAll() {
-        return Storage.bills;
+        return Storage.BILLS;
     }
 
     @Override
     public Bill update(Bill bill) {
-        IntStream.range(0, Storage.bills.size())
-                .filter(i -> Storage.bills.get(i).getId().equals(bill.getId()))
-                .forEach(i -> Storage.bills.set(i, bill));
+        IntStream.range(0, Storage.BILLS.size())
+                .filter(i -> Storage.BILLS.get(i).getId().equals(bill.getId()))
+                .forEach(i -> Storage.BILLS.set(i, bill));
         return bill;
     }
 
     @Override
     public boolean delete(Long id) {
-        return Storage.bills.removeIf(b -> b.getId().equals(id));
+        return Storage.BILLS.removeIf(b -> b.getId().equals(id));
     }
 }

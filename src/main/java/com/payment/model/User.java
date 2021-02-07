@@ -1,5 +1,7 @@
 package com.payment.model;
 
+import java.util.Date;
+
 public class User {
     private Long id;
     private String firstName;
@@ -7,16 +9,16 @@ public class User {
     private String email;
     private String password;
     private Role role;
-    private Integer status;
+    private Long blockedBy;
+    private Date createTime;
 
-    public User(String firstName, String lastName, String email,
-                String password, Role role, Integer status) {
+    public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.role = role;
-        this.status = status;
+        this.role = Role.of("USER");
+        this.blockedBy = 0L;
     }
 
     public Long getId() {
@@ -67,12 +69,20 @@ public class User {
         this.role = role;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Long getBlockedBy() {
+        return blockedBy;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setBlockedBy(Long blockedBy) {
+        this.blockedBy = blockedBy;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     @Override
@@ -84,7 +94,8 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", status=" + status +
+                ", blockedBy=" + blockedBy +
+                ", createTime=" + createTime +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.payment.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Bill {
     private Long id;
@@ -8,12 +9,21 @@ public class Bill {
     private Long recipientAccountId;
     private BigDecimal amount;
     private Integer status;
+    private Date createTime;
 
     public Bill(Long senderAccountId, Long recipientAccountId, BigDecimal amount, Integer status) {
         this.senderAccountId = senderAccountId;
         this.recipientAccountId = recipientAccountId;
         this.amount = amount;
         this.status = status;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Long getId() {
