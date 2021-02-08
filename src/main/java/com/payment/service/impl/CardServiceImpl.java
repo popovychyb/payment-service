@@ -3,10 +3,10 @@ package com.payment.service.impl;
 import com.payment.dao.CardDao;
 import com.payment.dao.impl.CardDaoImpl;
 import com.payment.model.Card;
+import com.payment.model.enums.UserCardStatus;
 import com.payment.service.CardService;
 
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +22,7 @@ public class CardServiceImpl implements CardService {
     @Override
     public Card create(Card card) {
         card.setNumber(bankCode + String.format(cardFormat, (long) (random() * cardBase)));
-        LocalDate currentDate = LocalDate.now().plusYears(cardDuration);
-        card.setExpiry(YearMonth.of(currentDate.getYear(), currentDate.getMonth()));
+        card.setExpiry(LocalDate.now().plusYears(cardDuration));
         return cardDao.create(card);
     }
 
@@ -40,6 +39,20 @@ public class CardServiceImpl implements CardService {
     @Override
     public List<Card> getUserCards(Long id) {
         return cardDao.getUserCards(id);
+    }
+
+    @Override
+    public void blockCard(Long id) {
+        Card card = cardDao.get(id).get();
+        card.setStatus(UserCardStatus.BLOCKED);
+        cardDao.update(card);
+    }
+
+    @Override
+    public void unblockCard(Long id) {
+        Card card = cardDao.get(id).get();
+        card.setStatus(UserCardStatus.ACTIVE);
+        cardDao.update(card);
     }
 
     @Override

@@ -2,12 +2,16 @@ package com.payment;
 
 import com.payment.model.Bill;
 import com.payment.model.Card;
+import com.payment.model.Ticket;
 import com.payment.model.User;
+import com.payment.model.enums.Currency;
 import com.payment.service.BillService;
 import com.payment.service.CardService;
+import com.payment.service.TicketService;
 import com.payment.service.UserService;
 import com.payment.service.impl.BillServiceImpl;
 import com.payment.service.impl.CardServiceImpl;
+import com.payment.service.impl.TicketServiceImpl;
 import com.payment.service.impl.UserServiceImpl;
 
 import java.math.BigDecimal;
@@ -17,6 +21,7 @@ public class Main {
         UserService userService = new UserServiceImpl();
         CardService cardService = new CardServiceImpl();
         BillService billService = new BillServiceImpl();
+        TicketService ticketService  = new TicketServiceImpl();
 
         System.out.println("- User:");
         User bob = new User("Bob", "Smith", "bob@mail.com", "qwerty");
@@ -44,18 +49,18 @@ public class Main {
         userService.getAll().forEach(System.out::println);
 
         System.out.println("\n- BankAccount:");
-        Card bobAccount = new Card(bob.getId(), "bob's card", 0L);
-        Card bobSecondAccount = new Card(bob.getId(), "bob's second card", 0L);
-        Card lisaAccount = new Card(lisa.getId(), "lisa's card", 0L);
+        Card bobsCard = new Card(bob.getId(), "bob's card", Currency.UAH);
+        Card bobSecondAccount = new Card(bob.getId(), "bob's second card", Currency.EUR);
+        Card lisaAccount = new Card(lisa.getId(), "lisa's card", Currency.USD);
 
-        cardService.create(bobAccount);
+        cardService.create(bobsCard);
         cardService.create(bobSecondAccount);
         cardService.create(lisaAccount);
         cardService.getAll().forEach(System.out::println);
 
         System.out.println("\n- Bills:");
-        Bill bobsBill = new Bill(bobAccount.getId(), lisaAccount.getId(), new BigDecimal("1000"), 0);
-        Bill lisaBill = new Bill(lisaAccount.getId(), bobAccount.getId(), new BigDecimal("500"), 0);
+        Bill bobsBill = new Bill(bobsCard.getId(), lisaAccount.getId(), new BigDecimal("1000"));
+        Bill lisaBill = new Bill(lisaAccount.getId(), bobsCard.getId(), new BigDecimal("500"));
         billService.create(bobsBill);
         billService.create(lisaBill);
         billService.getAll().forEach(System.out::println);
@@ -71,5 +76,35 @@ public class Main {
 
         System.out.println("\n- getBillsByRecipientAccount");
         System.out.println(billService.getBillsByRecipientAccount(1L));
+
+        System.out.println("\n- Block / Unblock user:");
+        System.out.println(bob);
+        userService.blockUser(bob.getId());
+        System.out.println(bob);
+        userService.unblockUser(bob.getId());
+        System.out.println(bob);
+
+        System.out.println("\n- Block / Unblock card:");
+        System.out.println(bobsCard);
+        cardService.blockCard(bobsCard.getId());
+        System.out.println(bobsCard);
+        cardService.unblockCard(bobsCard.getId());
+        System.out.println(bobsCard);
+
+        System.out.println("\n- Tickets:");
+        cardService.blockCard(bobsCard.getId());
+        System.out.println("blocked:");
+        System.out.println(bobsCard);
+        Ticket bobsTicket = new Ticket(bobsCard.getId());
+        ticketService.create(bobsTicket);
+        System.out.println("after creating ticket:");
+        System.out.println(bobsCard);
+        System.out.println(bobsTicket);
+        System.out.println("all tickets:");
+        ticketService.getAll().forEach(System.out::println);
+        System.out.println("consider unblock:");
+        ticketService.consider(bobsTicket.getId(), true);
+        System.out.println(bobsTicket);
+        System.out.println(bobsCard);
     }
 }

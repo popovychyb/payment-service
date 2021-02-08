@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 public class CardDaoImpl implements CardDao {
     @Override
     public Card create(Card card) {
-        Storage.addBankAccount(card);
+        Storage.addCard(card);
         return card;
     }
 
@@ -47,5 +47,4 @@ public class CardDaoImpl implements CardDao {
     public boolean delete(Long id) {
         return Storage.CARDS.removeIf(b -> b.getId().equals(id));
     }
-
 }

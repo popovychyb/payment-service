@@ -1,6 +1,9 @@
 package com.payment.model;
 
-import java.util.Date;
+import com.payment.model.enums.Role;
+import com.payment.model.enums.UserCardStatus;
+
+import java.time.LocalDateTime;
 
 public class User {
     private Long id;
@@ -9,16 +12,17 @@ public class User {
     private String email;
     private String password;
     private Role role;
-    private Long blockedBy;
-    private Date createTime;
+    private UserCardStatus status;
+    private LocalDateTime createTime;
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.role = Role.of("USER");
-        this.blockedBy = 0L;
+        this.role = Role.USER;
+        this.status = UserCardStatus.ACTIVE;
+        this.createTime = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -69,20 +73,20 @@ public class User {
         this.role = role;
     }
 
-    public Long getBlockedBy() {
-        return blockedBy;
-    }
-
-    public void setBlockedBy(Long blockedBy) {
-        this.blockedBy = blockedBy;
-    }
-
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+    }
+
+    public UserCardStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserCardStatus status) {
+        this.status = status;
     }
 
     @Override
@@ -94,7 +98,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", blockedBy=" + blockedBy +
+                ", status=" + status +
                 ", createTime=" + createTime +
                 '}';
     }

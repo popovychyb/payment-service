@@ -1,8 +1,11 @@
 package com.payment.model;
 
+import com.payment.model.enums.Currency;
+import com.payment.model.enums.UserCardStatus;
+
 import java.math.BigDecimal;
-import java.time.YearMonth;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static java.lang.Math.random;
 
@@ -11,35 +14,39 @@ public class Card {
     private final int pinBase = 10000;
     private final String cvvFormat = "%03d";
     private final String pinFormat = "%04d";
+
     private Long id;
     private String number;
     private Long idUser;
     private BigDecimal balance;
-    private YearMonth expiry;
+    private LocalDate expiry;
     private String title;
     private String cvv2;
     private String pinCode;
-    private Long currencyId;
-    private Long blockedBy;
-    private Date createTime;
+    private Currency currency;
+    private UserCardStatus status;
+    private LocalDateTime createTime;
+
     public Card(String number) {
         this.number = number;
     }
-    public Card(Long idUser, String title, Long currencyId) {
+
+    public Card(Long idUser, String title, Currency currency) {
         this.idUser = idUser;
         this.balance = new BigDecimal("0");
         this.title = title;
         this.cvv2 = String.format(cvvFormat, (int) (random() * cvvBase));
         this.pinCode = String.format(pinFormat, (int) (random() * pinBase));
-        this.currencyId = currencyId;
-        this.blockedBy = 0L;
+        this.currency = currency;
+        this.status = UserCardStatus.ACTIVE;
+        this.createTime = LocalDateTime.now();
     }
 
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
@@ -75,11 +82,11 @@ public class Card {
         this.balance = balance;
     }
 
-    public YearMonth getExpiry() {
+    public LocalDate getExpiry() {
         return expiry;
     }
 
-    public void setExpiry(YearMonth expiry) {
+    public void setExpiry(LocalDate expiry) {
         this.expiry = expiry;
     }
 
@@ -107,20 +114,20 @@ public class Card {
         this.pinCode = pinCode;
     }
 
-    public Long getCurrencyId() {
-        return currencyId;
+    public Currency getCurrency() {
+        return currency;
     }
 
-    public void setCurrencyId(Long currencyId) {
-        this.currencyId = currencyId;
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
-    public Long getBlockedBy() {
-        return blockedBy;
+    public UserCardStatus getStatus() {
+        return status;
     }
 
-    public void setBlockedBy(Long blockedBy) {
-        this.blockedBy = blockedBy;
+    public void setStatus(UserCardStatus status) {
+        this.status = status;
     }
 
     @Override
@@ -134,8 +141,9 @@ public class Card {
                 ", title='" + title + '\'' +
                 ", cvv2='" + cvv2 + '\'' +
                 ", pinCode='" + pinCode + '\'' +
-                ", currencyId=" + currencyId +
-                ", blockedBy=" + blockedBy +
+                ", currency=" + currency +
+                ", status=" + status +
+                ", createTime=" + createTime +
                 '}';
     }
 }
