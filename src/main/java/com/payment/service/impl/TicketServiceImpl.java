@@ -51,7 +51,7 @@ public class TicketServiceImpl implements TicketService {
         Ticket ticket = get(id).get();
         Long cardId = ticket.getCardId();
         Card card = cardService.get(cardId).get();
-        if(unblock){
+        if (unblock) {
             card.setStatus(UserCardStatus.ACTIVE);
             ticket.setStatus(TicketStatus.APPROVED);
         } else {

@@ -3,9 +3,11 @@ package com.payment.service.impl;
 import com.payment.dao.CardDao;
 import com.payment.dao.impl.CardDaoImpl;
 import com.payment.model.Card;
+import com.payment.model.enums.Currency;
 import com.payment.model.enums.UserCardStatus;
 import com.payment.service.CardService;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -53,6 +55,34 @@ public class CardServiceImpl implements CardService {
         Card card = cardDao.get(id).get();
         card.setStatus(UserCardStatus.ACTIVE);
         cardDao.update(card);
+    }
+
+    @Override
+    public void replenish(Long id, BigDecimal amount) {
+        Card card = get(id).get();
+        if (card.getBalance() != null) {
+            BigDecimal balance = card.getBalance();
+            balance = balance.add(amount);
+            card.setBalance(balance);
+            update(card);
+        }
+    }
+
+    @Override
+    public void deduct(Long id, BigDecimal amount) {
+        Card card = get(id).get();
+        if (card.getBalance() != null) {
+            BigDecimal balance = card.getBalance();
+            balance = balance.subtract(amount);
+            card.setBalance(balance);
+            update(card);
+        }
+    }
+
+    @Override
+    public BigDecimal convert(Currency sender, Currency recipient, BigDecimal payment) {
+        return payment.multiply(sender.getConversionRate())
+                .multiply(recipient.getConversionRate());
     }
 
     @Override

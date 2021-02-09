@@ -3,6 +3,7 @@ package com.payment.service.impl;
 import com.payment.dao.UserDao;
 import com.payment.dao.impl.UserDaoImpl;
 import com.payment.model.User;
+import com.payment.model.enums.Role;
 import com.payment.model.enums.UserCardStatus;
 import com.payment.service.UserService;
 
@@ -48,6 +49,13 @@ public class UserServiceImpl implements UserService {
     public void unblockUser(Long id) {
         User user = userDao.get(id).get();
         user.setStatus(UserCardStatus.ACTIVE);
+        update(user);
+    }
+
+    @Override
+    public void raiseToAdmin(Long id) {
+        User user = userDao.get(id).get();
+        user.setRole(Role.ADMIN);
         update(user);
     }
 }

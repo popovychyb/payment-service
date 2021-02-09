@@ -26,22 +26,22 @@ public class BillDaoImpl implements BillDao {
     @Override
     public List<Bill> getBillsBySenderAccount(Long id) {
         return getAll().stream()
-                .filter(b -> b.getSenderAccountId().equals(id))
+                .filter(b -> b.getSenderCardId().equals(id))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Bill> getBillsByRecipientAccount(Long id) {
         return getAll().stream()
-                .filter(b -> b.getRecipientAccountId().equals(id))
+                .filter(b -> b.getRecipientCardId().equals(id))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Bill> getBillsByAccount(Long id) {
         return getAll().stream()
-                .filter(b -> b.getSenderAccountId().equals(id)
-                        || b.getRecipientAccountId().equals(id))
+                .filter(b -> b.getSenderCardId().equals(id)
+                        || b.getRecipientCardId().equals(id))
                 .collect(Collectors.toList());
     }
 

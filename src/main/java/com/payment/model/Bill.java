@@ -7,16 +7,16 @@ import java.time.LocalDateTime;
 
 public class Bill {
     private Long id;
-    private Long senderAccountId;
-    private Long recipientAccountId;
-    private BigDecimal amount;
+    private Long senderCardId;
+    private Long recipientCardId;
+    private BigDecimal payment;
     private BillStatus billStatus;
     private LocalDateTime createTime;
 
-    public Bill(Long senderAccountId, Long recipientAccountId, BigDecimal amount) {
-        this.senderAccountId = senderAccountId;
-        this.recipientAccountId = recipientAccountId;
-        this.amount = amount;
+    public Bill(Long senderCardId, Long recipientCardId, BigDecimal payment) {
+        this.senderCardId = senderCardId;
+        this.recipientCardId = recipientCardId;
+        this.payment = payment;
         this.billStatus = BillStatus.PREPARED;
         this.createTime = LocalDateTime.now();
     }
@@ -37,28 +37,28 @@ public class Bill {
         this.id = id;
     }
 
-    public Long getSenderAccountId() {
-        return senderAccountId;
+    public Long getSenderCardId() {
+        return senderCardId;
     }
 
-    public void setSenderAccountId(Long senderAccountId) {
-        this.senderAccountId = senderAccountId;
+    public void setSenderCardId(Long senderCardId) {
+        this.senderCardId = senderCardId;
     }
 
-    public Long getRecipientAccountId() {
-        return recipientAccountId;
+    public Long getRecipientCardId() {
+        return recipientCardId;
     }
 
-    public void setRecipientAccountId(Long recipientAccountId) {
-        this.recipientAccountId = recipientAccountId;
+    public void setRecipientCardId(Long recipientCardId) {
+        this.recipientCardId = recipientCardId;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public BigDecimal getPayment() {
+        return payment;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public void setPayment(BigDecimal payment) {
+        this.payment = payment;
     }
 
     public BillStatus getStatus() {
@@ -73,10 +73,10 @@ public class Bill {
     public String toString() {
         return "Bill{" +
                 "id=" + id +
-                ", senderAccountId=" + senderAccountId +
-                ", recipientAccountId=" + recipientAccountId +
-                ", amount=" + amount +
-                ", status=" + billStatus +
+                ", senderCardId=" + senderCardId +
+                ", recipientCardId=" + recipientCardId +
+                ", payment=" + payment +
+                ", billStatus=" + billStatus +
                 ", createTime=" + createTime +
                 '}';
     }

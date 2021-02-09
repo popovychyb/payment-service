@@ -21,7 +21,7 @@ public class Main {
         UserService userService = new UserServiceImpl();
         CardService cardService = new CardServiceImpl();
         BillService billService = new BillServiceImpl();
-        TicketService ticketService  = new TicketServiceImpl();
+        TicketService ticketService = new TicketServiceImpl();
 
         System.out.println("- User:");
         User bob = new User("Bob", "Smith", "bob@mail.com", "qwerty");
@@ -51,16 +51,16 @@ public class Main {
         System.out.println("\n- BankAccount:");
         Card bobsCard = new Card(bob.getId(), "bob's card", Currency.UAH);
         Card bobSecondAccount = new Card(bob.getId(), "bob's second card", Currency.EUR);
-        Card lisaAccount = new Card(lisa.getId(), "lisa's card", Currency.USD);
+        Card lisaCard = new Card(lisa.getId(), "lisa's card", Currency.USD);
 
         cardService.create(bobsCard);
         cardService.create(bobSecondAccount);
-        cardService.create(lisaAccount);
+        cardService.create(lisaCard);
         cardService.getAll().forEach(System.out::println);
 
         System.out.println("\n- Bills:");
-        Bill bobsBill = new Bill(bobsCard.getId(), lisaAccount.getId(), new BigDecimal("1000"));
-        Bill lisaBill = new Bill(lisaAccount.getId(), bobsCard.getId(), new BigDecimal("500"));
+        Bill bobsBill = new Bill(bobsCard.getId(), lisaCard.getId(), new BigDecimal("1000"));
+        Bill lisaBill = new Bill(lisaCard.getId(), bobsCard.getId(), new BigDecimal("500"));
         billService.create(bobsBill);
         billService.create(lisaBill);
         billService.getAll().forEach(System.out::println);
@@ -106,5 +106,41 @@ public class Main {
         ticketService.consider(bobsTicket.getId(), true);
         System.out.println(bobsTicket);
         System.out.println(bobsCard);
+
+        System.out.println("\n- Add money:");
+        System.out.println("before");
+        System.out.println(bobsCard);
+        cardService.replenish(bobsCard.getId(), new BigDecimal("999"));
+        System.out.println("after");
+        System.out.println(bobsCard);
+        cardService.replenish(bobsCard.getId(), new BigDecimal("100"));
+        System.out.println(bobsCard);
+
+        System.out.println("\n- Minus money:");
+        System.out.println("before");
+        System.out.println(bobsCard);
+        cardService.deduct(bobsCard.getId(), new BigDecimal("9"));
+        System.out.println("after");
+        System.out.println(bobsCard);
+        cardService.deduct(bobsCard.getId(), new BigDecimal("10"));
+        System.out.println(bobsCard);
+
+        System.out.println("\n- Send bill:");
+        System.out.println("before");
+        System.out.println(bobsBill);
+        System.out.println(bobsCard);
+        System.out.println(lisaCard);
+        System.out.println("after");
+        billService.send(bobsBill.getId());
+        System.out.println(bobsBill);
+        System.out.println(bobsCard);
+        System.out.println(lisaCard);
+
+        System.out.println("\n- Raise to admin:");
+        System.out.println("before");
+        System.out.println(bob);
+        System.out.println("after");
+        userService.raiseToAdmin(bob.getId());
+        System.out.println(bob);
     }
 }

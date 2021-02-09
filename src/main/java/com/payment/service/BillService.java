@@ -10,4 +10,6 @@ public interface BillService extends GenericService<Bill, Long> {
     List<Bill> getBillsByRecipientAccount(Long id);
 
     List<Bill> getBillsByAccount(Long id);
+
+    void send(Long id);
 }
