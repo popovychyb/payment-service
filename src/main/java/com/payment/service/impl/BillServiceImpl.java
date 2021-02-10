@@ -77,6 +77,4 @@ public class BillServiceImpl implements BillService {
     public boolean delete(Long id) {
         return billDao.delete(id);
     }
-
-
 }
