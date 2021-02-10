@@ -13,15 +13,11 @@ import com.payment.service.impl.BillServiceImpl;
 import com.payment.service.impl.CardServiceImpl;
 import com.payment.service.impl.TicketServiceImpl;
 import com.payment.service.impl.UserServiceImpl;
-
 import java.math.BigDecimal;
 
 public class Main {
     public static void main(String[] args) {
         UserService userService = new UserServiceImpl();
-        CardService cardService = new CardServiceImpl();
-        BillService billService = new BillServiceImpl();
-        TicketService ticketService = new TicketServiceImpl();
 
         System.out.println("- User:");
         User bob = new User("Bob", "Smith", "bob@mail.com", "qwerty");
@@ -53,11 +49,13 @@ public class Main {
         Card bobSecondAccount = new Card(bob.getId(), "bob's second card", Currency.EUR);
         Card lisaCard = new Card(lisa.getId(), "lisa's card", Currency.USD);
 
+        CardService cardService = new CardServiceImpl();
         cardService.create(bobsCard);
         cardService.create(bobSecondAccount);
         cardService.create(lisaCard);
         cardService.getAll().forEach(System.out::println);
 
+        BillService billService = new BillServiceImpl();
         System.out.println("\n- Bills:");
         Bill bobsBill = new Bill(bobsCard.getId(), lisaCard.getId(), new BigDecimal("1000"));
         Bill lisaBill = new Bill(lisaCard.getId(), bobsCard.getId(), new BigDecimal("500"));
@@ -93,6 +91,7 @@ public class Main {
 
         System.out.println("\n- Tickets:");
         cardService.blockCard(bobsCard.getId());
+        TicketService ticketService = new TicketServiceImpl();
         System.out.println("blocked:");
         System.out.println(bobsCard);
         Ticket bobsTicket = new Ticket(bobsCard.getId());

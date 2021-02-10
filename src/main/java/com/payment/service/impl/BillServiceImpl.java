@@ -7,7 +7,6 @@ import com.payment.model.Card;
 import com.payment.model.enums.BillStatus;
 import com.payment.service.BillService;
 import com.payment.service.CardService;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -57,9 +56,9 @@ public class BillServiceImpl implements BillService {
         }
         Card recipient = cardService.get(bill.getRecipientCardId()).get();
         cardService.deduct(sender.getId(), payment);
-        if (sender.getCurrency() != null &&
-                recipient.getCurrency() != null &&
-                sender.getCurrency() != recipient.getCurrency()) {
+        if (sender.getCurrency() != null
+                && recipient.getCurrency() != null
+                && sender.getCurrency() != recipient.getCurrency()) {
             payment = cardService.convert(sender.getCurrency(),
                     recipient.getCurrency(), payment);
         }

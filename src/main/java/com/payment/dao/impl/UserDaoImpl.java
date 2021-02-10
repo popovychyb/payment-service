@@ -3,7 +3,6 @@ package com.payment.dao.impl;
 import com.payment.dao.UserDao;
 import com.payment.db.Storage;
 import com.payment.model.User;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;

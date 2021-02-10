@@ -2,12 +2,9 @@ package com.payment.model;
 
 import com.payment.model.enums.Currency;
 import com.payment.model.enums.UserCardStatus;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import static java.lang.Math.random;
 
 public class Card {
     private final int cvvBase = 1000;
@@ -35,8 +32,8 @@ public class Card {
         this.idUser = idUser;
         this.balance = new BigDecimal("0");
         this.title = title;
-        this.cvv2 = String.format(cvvFormat, (int) (random() * cvvBase));
-        this.pinCode = String.format(pinFormat, (int) (random() * pinBase));
+        this.cvv2 = String.format(cvvFormat, (int) (Math.random() * cvvBase));
+        this.pinCode = String.format(pinFormat, (int) (Math.random() * pinBase));
         this.currency = currency;
         this.status = UserCardStatus.ACTIVE;
         this.createTime = LocalDateTime.now();
@@ -132,18 +129,17 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "id=" + id +
-                ", number='" + number + '\'' +
-                ", idUser=" + idUser +
-                ", balance=" + balance +
-                ", expiry=" + expiry +
-                ", title='" + title + '\'' +
-                ", cvv2='" + cvv2 + '\'' +
-                ", pinCode='" + pinCode + '\'' +
-                ", currency=" + currency +
-                ", status=" + status +
-                ", createTime=" + createTime +
-                '}';
+        return "Card{"
+                + "id=" + id
+                + ", number='" + number + '\''
+                + ", idUser=" + idUser
+                + ", balance=" + balance
+                + ", expiry=" + expiry
+                + ", title='" + title + '\''
+                + ", cvv2='" + cvv2 + '\''
+                + ", pinCode='" + pinCode + '\''
+                + ", currency=" + currency
+                + ", status=" + status
+                + ", createTime=" + createTime + '}';
     }
 }

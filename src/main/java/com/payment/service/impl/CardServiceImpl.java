@@ -6,24 +6,21 @@ import com.payment.model.Card;
 import com.payment.model.enums.Currency;
 import com.payment.model.enums.UserCardStatus;
 import com.payment.service.CardService;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
-import static java.lang.Math.random;
 
 public class CardServiceImpl implements CardService {
     private final Long bankCode = 4578L;
     private final Long cardBase = 10000_0000_0000L;
     private final String cardFormat = "%012d";
     private final Integer cardDuration = 2;
-    CardDao cardDao = new CardDaoImpl();
+    private final CardDao cardDao = new CardDaoImpl();
 
     @Override
     public Card create(Card card) {
-        card.setNumber(bankCode + String.format(cardFormat, (long) (random() * cardBase)));
+        card.setNumber(bankCode + String.format(cardFormat, (long) (Math.random() * cardBase)));
         card.setExpiry(LocalDate.now().plusYears(cardDuration));
         return cardDao.create(card);
     }

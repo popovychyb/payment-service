@@ -1,7 +1,6 @@
 package com.payment.service;
 
 import com.payment.model.Bill;
-
 import java.util.List;
 
 public interface BillService extends GenericService<Bill, Long> {

@@ -8,14 +8,13 @@ import com.payment.model.enums.TicketStatus;
 import com.payment.model.enums.UserCardStatus;
 import com.payment.service.CardService;
 import com.payment.service.TicketService;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 public class TicketServiceImpl implements TicketService {
-    TicketDao ticketDao = new TicketDaoImpl();
-    CardService cardService = new CardServiceImpl();
+    private final TicketDao ticketDao = new TicketDaoImpl();
+    private final CardService cardService = new CardServiceImpl();
 
     @Override
     public Ticket create(Ticket ticket) {
