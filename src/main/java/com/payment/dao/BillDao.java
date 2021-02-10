@@ -1,8 +1,6 @@
 package com.payment.dao;
 
-
 import com.payment.model.Bill;
-
 import java.util.List;
 
 public interface BillDao extends GenericDao<Bill, Long> {

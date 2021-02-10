@@ -13,7 +13,6 @@ public enum Currency {
     //Rates in currency units per U.S. dollar
     private final BigDecimal conversionRate;
 
-
     Currency(String name, String fractional, Character symbol, BigDecimal conversionRate) {
         this.name = name;
         this.symbol = symbol;

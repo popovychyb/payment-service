@@ -1,7 +1,6 @@
 package com.payment.model;
 
 import com.payment.model.enums.TicketStatus;
-
 import java.time.LocalDateTime;
 
 public class Ticket {
@@ -77,14 +76,13 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket{" +
-                "id=" + id +
-                ", cardId=" + cardId +
-                ", status=" + status +
-                ", createTime=" + createTime +
-                ", lastUpdate=" + lastUpdate +
-                ", ticketMessage='" + ticketMessage + '\'' +
-                ", responseMessage='" + responseMessage + '\'' +
-                '}';
+        return "Ticket{"
+                + "id=" + id
+                + ", cardId=" + cardId
+                + ", status=" + status
+                + ", createTime=" + createTime
+                + ", lastUpdate=" + lastUpdate
+                + ", ticketMessage='" + ticketMessage + '\''
+                + ", responseMessage='" + responseMessage + '\'' + '}';
     }
 }

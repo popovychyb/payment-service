@@ -2,7 +2,6 @@ package com.payment.model;
 
 import com.payment.model.enums.Role;
 import com.payment.model.enums.UserCardStatus;
-
 import java.time.LocalDateTime;
 
 public class User {
@@ -91,15 +90,14 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                ", status=" + status +
-                ", createTime=" + createTime +
-                '}';
+        return "User{"
+                + "id=" + id
+                + ", firstName='" + firstName + '\''
+                + ", lastName='" + lastName + '\''
+                + ", email='" + email + '\''
+                + ", password='" + password + '\''
+                + ", role=" + role
+                + ", status=" + status
+                + ", createTime=" + createTime + '}';
     }
 }

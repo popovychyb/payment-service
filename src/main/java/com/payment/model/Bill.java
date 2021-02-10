@@ -1,7 +1,6 @@
 package com.payment.model;
 
 import com.payment.model.enums.BillStatus;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -71,13 +70,12 @@ public class Bill {
 
     @Override
     public String toString() {
-        return "Bill{" +
-                "id=" + id +
-                ", senderCardId=" + senderCardId +
-                ", recipientCardId=" + recipientCardId +
-                ", payment=" + payment +
-                ", billStatus=" + billStatus +
-                ", createTime=" + createTime +
-                '}';
+        return "Bill{"
+                + "id=" + id
+                + ", senderCardId=" + senderCardId
+                + ", recipientCardId=" + recipientCardId
+                + ", payment=" + payment
+                + ", billStatus=" + billStatus
+                + ", createTime=" + createTime + '}';
     }
 }
