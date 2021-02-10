@@ -26,40 +26,40 @@ public class BillDaoImpl implements BillDao {
     @Override
     public List<Bill> getBillsBySenderAccount(Long id) {
         return getAll().stream()
-                .filter(b -> b.getSenderAccountId().equals(id))
+                .filter(b -> b.getSenderCardId().equals(id))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Bill> getBillsByRecipientAccount(Long id) {
         return getAll().stream()
-                .filter(b -> b.getRecipientAccountId().equals(id))
+                .filter(b -> b.getRecipientCardId().equals(id))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Bill> getBillsByAccount(Long id) {
         return getAll().stream()
-                .filter(b -> b.getSenderAccountId().equals(id)
-                        || b.getRecipientAccountId().equals(id))
+                .filter(b -> b.getSenderCardId().equals(id)
+                        || b.getRecipientCardId().equals(id))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Bill> getAll() {
-        return Storage.bills;
+        return Storage.BILLS;
     }
 
     @Override
     public Bill update(Bill bill) {
-        IntStream.range(0, Storage.bills.size())
-                .filter(i -> Storage.bills.get(i).getId().equals(bill.getId()))
-                .forEach(i -> Storage.bills.set(i, bill));
+        IntStream.range(0, Storage.BILLS.size())
+                .filter(i -> Storage.BILLS.get(i).getId().equals(bill.getId()))
+                .forEach(i -> Storage.BILLS.set(i, bill));
         return bill;
     }
 
     @Override
     public boolean delete(Long id) {
-        return Storage.bills.removeIf(b -> b.getId().equals(id));
+        return Storage.BILLS.removeIf(b -> b.getId().equals(id));
     }
 }

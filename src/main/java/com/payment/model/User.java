@@ -1,5 +1,10 @@
 package com.payment.model;
 
+import com.payment.model.enums.Role;
+import com.payment.model.enums.UserCardStatus;
+
+import java.time.LocalDateTime;
+
 public class User {
     private Long id;
     private String firstName;
@@ -7,16 +12,17 @@ public class User {
     private String email;
     private String password;
     private Role role;
-    private Integer status;
+    private UserCardStatus status;
+    private LocalDateTime createTime;
 
-    public User(String firstName, String lastName, String email,
-                String password, Role role, Integer status) {
+    public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.role = role;
-        this.status = status;
+        this.role = Role.USER;
+        this.status = UserCardStatus.ACTIVE;
+        this.createTime = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -67,11 +73,19 @@ public class User {
         this.role = role;
     }
 
-    public Integer getStatus() {
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public UserCardStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(UserCardStatus status) {
         this.status = status;
     }
 
@@ -85,6 +99,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 ", status=" + status +
+                ", createTime=" + createTime +
                 '}';
     }
 }

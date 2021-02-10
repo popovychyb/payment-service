@@ -1,19 +1,32 @@
 package com.payment.model;
 
+import com.payment.model.enums.BillStatus;
+
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class Bill {
     private Long id;
-    private Long senderAccountId;
-    private Long recipientAccountId;
-    private BigDecimal amount;
-    private Integer status;
+    private Long senderCardId;
+    private Long recipientCardId;
+    private BigDecimal payment;
+    private BillStatus billStatus;
+    private LocalDateTime createTime;
 
-    public Bill(Long senderAccountId, Long recipientAccountId, BigDecimal amount, Integer status) {
-        this.senderAccountId = senderAccountId;
-        this.recipientAccountId = recipientAccountId;
-        this.amount = amount;
-        this.status = status;
+    public Bill(Long senderCardId, Long recipientCardId, BigDecimal payment) {
+        this.senderCardId = senderCardId;
+        this.recipientCardId = recipientCardId;
+        this.payment = payment;
+        this.billStatus = BillStatus.PREPARED;
+        this.createTime = LocalDateTime.now();
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 
     public Long getId() {
@@ -24,46 +37,47 @@ public class Bill {
         this.id = id;
     }
 
-    public Long getSenderAccountId() {
-        return senderAccountId;
+    public Long getSenderCardId() {
+        return senderCardId;
     }
 
-    public void setSenderAccountId(Long senderAccountId) {
-        this.senderAccountId = senderAccountId;
+    public void setSenderCardId(Long senderCardId) {
+        this.senderCardId = senderCardId;
     }
 
-    public Long getRecipientAccountId() {
-        return recipientAccountId;
+    public Long getRecipientCardId() {
+        return recipientCardId;
     }
 
-    public void setRecipientAccountId(Long recipientAccountId) {
-        this.recipientAccountId = recipientAccountId;
+    public void setRecipientCardId(Long recipientCardId) {
+        this.recipientCardId = recipientCardId;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public BigDecimal getPayment() {
+        return payment;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public void setPayment(BigDecimal payment) {
+        this.payment = payment;
     }
 
-    public Integer getStatus() {
-        return status;
+    public BillStatus getStatus() {
+        return billStatus;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setStatus(BillStatus billStatus) {
+        this.billStatus = billStatus;
     }
 
     @Override
     public String toString() {
         return "Bill{" +
                 "id=" + id +
-                ", senderAccountId=" + senderAccountId +
-                ", recipientAccountId=" + recipientAccountId +
-                ", amount=" + amount +
-                ", status=" + status +
+                ", senderCardId=" + senderCardId +
+                ", recipientCardId=" + recipientCardId +
+                ", payment=" + payment +
+                ", billStatus=" + billStatus +
+                ", createTime=" + createTime +
                 '}';
     }
 }
