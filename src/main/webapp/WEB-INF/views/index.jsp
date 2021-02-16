@@ -9,7 +9,9 @@
 <br>
 <a href="${pageContext.request.contextPath}/inject">Inject test data into the DB</a>
 <br>
-<a href="${pageContext.request.contextPath}/user/registration">registration</a>
+<a href="${pageContext.request.contextPath}/registration">registration</a>
+<br>
+<a href="${pageContext.request.contextPath}/login">login</a>
 <br>
 <a href="${pageContext.request.contextPath}/user/all">user/all</a>
 <br>

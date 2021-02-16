@@ -64,4 +64,9 @@ public class UserServiceImpl implements UserService {
         user.setRole(Role.USER);
         update(user);
     }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
 }

@@ -1,6 +1,7 @@
 package com.payment.service;
 
 import com.payment.model.User;
+import java.util.Optional;
 
 public interface UserService extends GenericService<User, Long> {
     void blockUser(Long id);
@@ -10,4 +11,6 @@ public interface UserService extends GenericService<User, Long> {
     void raiseToAdmin(Long id);
 
     void reduceToUser(Long id);
+
+    Optional<User> findByEmail(String email);
 }
