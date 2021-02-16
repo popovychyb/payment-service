@@ -1,7 +1,7 @@
 package com.payment.model;
 
 import com.payment.model.enums.Role;
-import com.payment.model.enums.UserCardStatus;
+import com.payment.model.enums.ActivityStatus;
 import java.time.LocalDateTime;
 
 public class User {
@@ -11,7 +11,7 @@ public class User {
     private String email;
     private String password;
     private Role role;
-    private UserCardStatus status;
+    private ActivityStatus status;
     private LocalDateTime createTime;
 
     public User(String firstName, String lastName, String email, String password) {
@@ -20,7 +20,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.role = Role.USER;
-        this.status = UserCardStatus.ACTIVE;
+        this.status = ActivityStatus.ACTIVE;
         this.createTime = LocalDateTime.now();
     }
 
@@ -80,11 +80,11 @@ public class User {
         this.createTime = createTime;
     }
 
-    public UserCardStatus getStatus() {
+    public ActivityStatus getStatus() {
         return status;
     }
 
-    public void setStatus(UserCardStatus status) {
+    public void setStatus(ActivityStatus status) {
         this.status = status;
     }
 

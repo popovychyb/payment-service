@@ -8,4 +8,6 @@ public interface UserService extends GenericService<User, Long> {
     void unblockUser(Long id);
 
     void raiseToAdmin(Long id);
+
+    void reduceToUser(Long id);
 }

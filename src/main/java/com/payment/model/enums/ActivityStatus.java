@@ -1,6 +1,6 @@
 package com.payment.model.enums;
 
-public enum UserCardStatus {
+public enum ActivityStatus {
     ACTIVE,
     BLOCKED,
     CONSIDERATION

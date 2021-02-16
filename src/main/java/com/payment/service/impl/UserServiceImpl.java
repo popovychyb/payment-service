@@ -4,7 +4,7 @@ import com.payment.dao.UserDao;
 import com.payment.dao.impl.UserDaoImpl;
 import com.payment.model.User;
 import com.payment.model.enums.Role;
-import com.payment.model.enums.UserCardStatus;
+import com.payment.model.enums.ActivityStatus;
 import com.payment.service.UserService;
 import java.util.List;
 import java.util.Optional;
@@ -40,14 +40,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void blockUser(Long id) {
         User user = userDao.get(id).get();
-        user.setStatus(UserCardStatus.BLOCKED);
+        user.setStatus(ActivityStatus.BLOCKED);
         update(user);
     }
 
     @Override
     public void unblockUser(Long id) {
         User user = userDao.get(id).get();
-        user.setStatus(UserCardStatus.ACTIVE);
+        user.setStatus(ActivityStatus.ACTIVE);
         update(user);
     }
 
@@ -55,6 +55,13 @@ public class UserServiceImpl implements UserService {
     public void raiseToAdmin(Long id) {
         User user = userDao.get(id).get();
         user.setRole(Role.ADMIN);
+        update(user);
+    }
+
+    @Override
+    public void reduceToUser(Long id) {
+        User user = userDao.get(id).get();
+        user.setRole(Role.USER);
         update(user);
     }
 }

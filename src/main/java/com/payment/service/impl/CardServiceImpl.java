@@ -4,7 +4,7 @@ import com.payment.dao.CardDao;
 import com.payment.dao.impl.CardDaoImpl;
 import com.payment.model.Card;
 import com.payment.model.enums.Currency;
-import com.payment.model.enums.UserCardStatus;
+import com.payment.model.enums.ActivityStatus;
 import com.payment.service.CardService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -43,14 +43,14 @@ public class CardServiceImpl implements CardService {
     @Override
     public void blockCard(Long id) {
         Card card = cardDao.get(id).get();
-        card.setStatus(UserCardStatus.BLOCKED);
+        card.setStatus(ActivityStatus.BLOCKED);
         cardDao.update(card);
     }
 
     @Override
     public void unblockCard(Long id) {
         Card card = cardDao.get(id).get();
-        card.setStatus(UserCardStatus.ACTIVE);
+        card.setStatus(ActivityStatus.ACTIVE);
         cardDao.update(card);
     }
 

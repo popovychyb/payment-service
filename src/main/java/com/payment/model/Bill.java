@@ -60,11 +60,11 @@ public class Bill {
         this.payment = payment;
     }
 
-    public BillStatus getStatus() {
+    public BillStatus getBillStatus() {
         return billStatus;
     }
 
-    public void setStatus(BillStatus billStatus) {
+    public void setBillStatus(BillStatus billStatus) {
         this.billStatus = billStatus;
     }
 
