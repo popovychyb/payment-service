@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
@@ -30,9 +31,12 @@ public class LoginController extends HttpServlet {
 
         try {
             User user = authService.login(email, password);
+            HttpSession session = req.getSession();
+            session.setAttribute("user_id", user.getId());
         } catch (AuthenticationException e) {
             req.setAttribute("errorMsg", e.getMessage());
-            req.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/user/login.jsp")
+                    .forward(req, resp);
         }
         resp.sendRedirect(req.getContextPath() + "/");
     }

@@ -1,9 +1,11 @@
 package com.payment.controller.user;
 
 import com.payment.model.User;
+import com.payment.model.enums.Role;
 import com.payment.service.UserService;
 import com.payment.service.impl.UserServiceImpl;
 import java.io.IOException;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,12 +33,15 @@ public class RegistrationController extends HttpServlet {
 
         if (pwd.equals(pwdRepeat)) {
             User user = new User(firstName, lastName, email, pwd);
+            user.setRoles(Set.of(Role.of("USER")));
             userService.create(user);
             resp.sendRedirect(req.getContextPath() + "/");
         } else {
             req.setAttribute("message",
-                    "Your password and repeat password aren't the same. Please try again.");
-            req.getRequestDispatcher("/WEB-INF/views/user/registration.jsp").forward(req, resp);
+                    "Your password and repeat password aren't the same. " +
+                            "Please try again.");
+            req.getRequestDispatcher("/WEB-INF/views/user/registration.jsp")
+                    .forward(req, resp);
         }
     }
 }

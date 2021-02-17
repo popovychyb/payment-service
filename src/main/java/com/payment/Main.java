@@ -139,7 +139,7 @@ public class Main {
         System.out.println("before");
         System.out.println(bob);
         System.out.println("after");
-        userService.raiseToAdmin(bob.getId());
+        userService.addAdminRole(bob.getId());
         System.out.println(bob);
     }
 }

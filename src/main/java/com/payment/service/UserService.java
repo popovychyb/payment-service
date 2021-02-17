@@ -8,9 +8,9 @@ public interface UserService extends GenericService<User, Long> {
 
     void unblockUser(Long id);
 
-    void raiseToAdmin(Long id);
+    void addAdminRole(Long id);
 
-    void reduceToUser(Long id);
+    void addUserRole(Long id);
 
     Optional<User> findByEmail(String email);
 }

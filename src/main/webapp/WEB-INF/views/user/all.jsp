@@ -15,8 +15,7 @@
         <th>Role</th>
         <th>Status</th>
         <th>Create time</th>
-        <th>Change role</th>
-        <th>Delete</th>
+        <th>Block</th>
         <th>Delete</th>
     </tr>
     <c:forEach var="user" items="${users}">
@@ -34,7 +33,9 @@
                 <c:out value="${user.email}"/>
             </td>
             <td>
-                <c:out value="${user.role}"/>
+                <c:forEach var="role" items="${user.roles}">
+                    <c:out value="${role.roleName}"/>
+                </c:forEach>
             </td>
             <td>
                 <c:out value="${user.status}"/>
@@ -45,10 +46,6 @@
             <td>
                 <a href="${pageContext.request.contextPath}/user/block?id=${user.id}">
                     Block/Unblock</a>
-            </td>
-            <td>
-                <a href="${pageContext.request.contextPath}/user/role?id=${user.id}">
-                    Admin/User</a>
             </td>
             <td>
                 <a href="${pageContext.request.contextPath}/user/delete?id=${user.id}">

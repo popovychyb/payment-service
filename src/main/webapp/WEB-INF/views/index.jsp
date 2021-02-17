@@ -13,6 +13,8 @@
 <br>
 <a href="${pageContext.request.contextPath}/login">login</a>
 <br>
+<a href="${pageContext.request.contextPath}/logout">logout</a>
+<br>
 <a href="${pageContext.request.contextPath}/user/all">user/all</a>
 <br>
 <a href="${pageContext.request.contextPath}/card/all">card/all</a>
