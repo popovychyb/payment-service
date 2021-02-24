@@ -1,32 +1,30 @@
 package com.payment.model;
 
-import com.payment.model.enums.BillStatus;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 public class Bill {
     private Long id;
     private Long senderCardId;
     private Long recipientCardId;
     private BigDecimal payment;
-    private BillStatus billStatus;
-    private LocalDateTime createTime;
+    private Long billStatusId;
+    //private LocalDateTime createTime;
 
     public Bill(Long senderCardId, Long recipientCardId, BigDecimal payment) {
         this.senderCardId = senderCardId;
         this.recipientCardId = recipientCardId;
         this.payment = payment;
-        this.billStatus = BillStatus.PREPARED;
-        this.createTime = LocalDateTime.now();
+        this.billStatusId = 1L;
+//        this.createTime = LocalDateTime.now();
     }
 
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
+//    public LocalDateTime getCreateTime() {
+//        return createTime;
+//    }
 
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
+//    public void setCreateTime(LocalDateTime createTime) {
+//        this.createTime = createTime;
+//    }
 
     public Long getId() {
         return id;
@@ -60,12 +58,12 @@ public class Bill {
         this.payment = payment;
     }
 
-    public BillStatus getBillStatus() {
-        return billStatus;
+    public Long getBillStatusId() {
+        return billStatusId;
     }
 
-    public void setBillStatus(BillStatus billStatus) {
-        this.billStatus = billStatus;
+    public void setBillStatusId(Long billStatusId) {
+        this.billStatusId = billStatusId;
     }
 
     @Override
@@ -75,7 +73,8 @@ public class Bill {
                 + ", senderCardId=" + senderCardId
                 + ", recipientCardId=" + recipientCardId
                 + ", payment=" + payment
-                + ", billStatus=" + billStatus
-                + ", createTime=" + createTime + '}';
+                + ", billStatusId=" + billStatusId
+//                + ", createTime=" + createTime
+                + '}';
     }
 }

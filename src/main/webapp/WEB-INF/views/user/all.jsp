@@ -14,7 +14,7 @@
         <th>Email</th>
         <th>Role</th>
         <th>Status</th>
-        <th>Create time</th>
+        <%--        <th>Create time</th>--%>
         <th>Block</th>
         <th>Delete</th>
     </tr>
@@ -33,16 +33,31 @@
                 <c:out value="${user.email}"/>
             </td>
             <td>
-                <c:forEach var="role" items="${user.roles}">
-                    <c:out value="${role.roleName}"/>
-                </c:forEach>
+                <c:choose>
+                    <c:when test="${user.roleId == 0}">
+                        <c:out value="ADMIN"/>
+                    </c:when>
+                    <c:otherwise>
+                        <c:out value="USER"/>
+                    </c:otherwise>
+                </c:choose>
             </td>
             <td>
-                <c:out value="${user.status}"/>
+                <c:choose>
+                    <c:when test="${user.activityStatusId == 1}">
+                        <c:out value="ACTIVE"/>
+                    </c:when>
+                    <c:when test="${user.activityStatusId == 2}">
+                        <c:out value="BLOCKED"/>
+                    </c:when>
+                    <c:otherwise>
+                        <c:out value="CONSIDERATION"/>
+                    </c:otherwise>
+                </c:choose>
             </td>
-            <td>
-                <c:out value="${user.createTime}"/>
-            </td>
+                <%--            <td>--%>
+                <%--                <c:out value="${user.createTime}"/>--%>
+                <%--            </td>--%>
             <td>
                 <a href="${pageContext.request.contextPath}/user/block?id=${user.id}">
                     Block/Unblock</a>

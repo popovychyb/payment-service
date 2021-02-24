@@ -1,10 +1,9 @@
 package com.payment.service.impl;
 
 import com.payment.dao.BillDao;
-import com.payment.dao.impl.BillDaoImpl;
+import com.payment.dao.jdbs.BillDaoJdbc;
 import com.payment.model.Bill;
 import com.payment.model.Card;
-import com.payment.model.enums.BillStatus;
 import com.payment.service.BillService;
 import com.payment.service.CardService;
 import java.math.BigDecimal;
@@ -12,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class BillServiceImpl implements BillService {
-    private final BillDao billDao = new BillDaoImpl();
+    private final BillDao billDao = new BillDaoJdbc();
     private final CardService cardService = new CardServiceImpl();
 
     @Override
@@ -51,19 +50,19 @@ public class BillServiceImpl implements BillService {
         BigDecimal payment = bill.getPayment();
         Card sender = cardService.get(bill.getSenderCardId()).get();
         if (sender.getBalance().compareTo(payment) < 0) {
-            bill.setBillStatus(BillStatus.REJECTED);
+            bill.setBillStatusId(3L);
             return;
         }
         Card recipient = cardService.get(bill.getRecipientCardId()).get();
         cardService.deduct(sender.getId(), payment);
-        if (sender.getCurrency() != null
-                && recipient.getCurrency() != null
-                && sender.getCurrency() != recipient.getCurrency()) {
-            payment = cardService.convert(sender.getCurrency(),
-                    recipient.getCurrency(), payment);
-        }
+//        if (sender.getCurrency() != null
+//                && recipient.getCurrency() != null
+//                && sender.getCurrency() != recipient.getCurrency()) {
+//            payment = cardService.convert(sender.getCurrency(),
+//                    recipient.getCurrency(), payment);
+//        }
         cardService.replenish(recipient.getId(), payment);
-        bill.setBillStatus(BillStatus.SENT);
+        bill.setBillStatusId(2L);
         update(bill);
     }
 

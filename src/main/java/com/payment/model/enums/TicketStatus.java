@@ -1,7 +1,15 @@
 package com.payment.model.enums;
 
-public enum TicketStatus {
+import com.payment.model.Ticket;
+
+public enum TicketStatus{
     NEW,
     APPROVED,
-    DECLINED
+    DECLINED;
+
+    public static TicketStatus getTicketStatus(Ticket ticket){
+        return TicketStatus.values()[Math.toIntExact(ticket.getTicketStatusId()) - 1];
+    }
 }
+
+

@@ -1,25 +1,22 @@
 package com.payment.service.impl;
 
 import com.payment.dao.TicketDao;
-import com.payment.dao.impl.TicketDaoImpl;
+import com.payment.dao.jdbs.TicketDaoJdbc;
 import com.payment.model.Card;
 import com.payment.model.Ticket;
-import com.payment.model.enums.TicketStatus;
-import com.payment.model.enums.ActivityStatus;
 import com.payment.service.CardService;
 import com.payment.service.TicketService;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 public class TicketServiceImpl implements TicketService {
-    private final TicketDao ticketDao = new TicketDaoImpl();
+    private final TicketDao ticketDao = new TicketDaoJdbc();
     private final CardService cardService = new CardServiceImpl();
 
     @Override
     public Ticket create(Ticket ticket) {
         Card card = cardService.get(ticket.getCardId()).get();
-        card.setStatus(ActivityStatus.CONSIDERATION);
+        card.setActivityStatusId(3L);
         cardService.update(card);
         return ticketDao.create(ticket);
     }
@@ -36,7 +33,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket update(Ticket ticket) {
-        ticket.setLastUpdate(LocalDateTime.now());
+//        ticket.setLastUpdate(LocalDateTime.now());
         return ticketDao.update(ticket);
     }
 
@@ -51,11 +48,11 @@ public class TicketServiceImpl implements TicketService {
         Long cardId = ticket.getCardId();
         Card card = cardService.get(cardId).get();
         if (unblock) {
-            card.setStatus(ActivityStatus.ACTIVE);
-            ticket.setStatus(TicketStatus.APPROVED);
+            card.setActivityStatusId(1L);
+            ticket.setTicketStatusId(2L);
         } else {
-            card.setStatus(ActivityStatus.BLOCKED);
-            ticket.setStatus(TicketStatus.DECLINED);
+            card.setActivityStatusId(2L);
+            ticket.setTicketStatusId(3L);
         }
         update(ticket);
         cardService.update(card);

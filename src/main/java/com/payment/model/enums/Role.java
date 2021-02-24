@@ -1,34 +1,15 @@
 package com.payment.model.enums;
 
-public class Role {
-    private Long id;
-    private RoleName roleName;
+import com.payment.model.User;
 
-    public Role(RoleName roleName) {
-        this.roleName = roleName;
+public enum Role {
+    ADMIN, CLIENT;
+
+    public static Role getRole(User user){
+        return Role.values()[Math.toIntExact(user.getRoleId())];
     }
 
-    public static Role of(String roleName){
-        return new Role(RoleName.valueOf(roleName));
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public RoleName getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(RoleName roleName) {
-        this.roleName = roleName;
-    }
-
-    public enum RoleName{
-        USER, ADMIN;
+    public String getName(){
+        return name().toLowerCase();
     }
 }

@@ -19,17 +19,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AuthorizationFilter implements Filter {
-    private Map<String, List<Role.RoleName>> protectedUrls = new HashMap<>();
+    private Map<String, List<Role>> protectedUrls = new HashMap<>();
     private static final String USER_ID = "user_id";
     private  final UserService userService = new UserServiceImpl();
     private static final Logger LOGGER = Logger.getLogger(AuthorizationFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        protectedUrls.put("/user/all", List.of(Role.RoleName.ADMIN));
-        protectedUrls.put("/ticket/all", List.of(Role.RoleName.ADMIN));
-        protectedUrls.put("/bill/all", List.of(Role.RoleName.ADMIN));
-        protectedUrls.put("/card/all", List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/user/all", List.of(Role.ADMIN));
+        protectedUrls.put("/ticket/all", List.of(Role.ADMIN));
+        protectedUrls.put("/bill/all", List.of(Role.ADMIN));
+        protectedUrls.put("/card/all", List.of(Role.ADMIN));
     }
 
     @Override
@@ -60,12 +60,10 @@ public class AuthorizationFilter implements Filter {
 
     }
 
-    private boolean isAuthorized(User user, List<Role.RoleName> authorizedRoles) {
-        for (Role.RoleName authorizedRole : authorizedRoles) {
-            for (Role userRole : user.getRoles()) {
-                if (authorizedRole.equals(userRole.getRoleName())) {
-                    return true;
-                }
+    private boolean isAuthorized(User user, List<Role> authorizedRoles) {
+        for (Role authorizedRole : authorizedRoles) {
+            if (authorizedRole.equals(Role.getRole(user))) {
+                return true;
             }
         }
         return false;

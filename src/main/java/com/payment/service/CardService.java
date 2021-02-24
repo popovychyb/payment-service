@@ -1,7 +1,6 @@
 package com.payment.service;
 
 import com.payment.model.Card;
-import com.payment.model.enums.Currency;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -16,5 +15,5 @@ public interface CardService extends GenericService<Card, Long> {
 
     void deduct(Long id, BigDecimal amount);
 
-    BigDecimal convert(Currency sender, Currency recipient, BigDecimal payment);
+//    BigDecimal convert(Currency sender, Currency recipient, BigDecimal payment);
 }

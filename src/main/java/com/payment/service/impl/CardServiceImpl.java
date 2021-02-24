@@ -1,13 +1,10 @@
 package com.payment.service.impl;
 
 import com.payment.dao.CardDao;
-import com.payment.dao.impl.CardDaoImpl;
+import com.payment.dao.jdbs.CardDaoJdbc;
 import com.payment.model.Card;
-import com.payment.model.enums.Currency;
-import com.payment.model.enums.ActivityStatus;
 import com.payment.service.CardService;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,12 +13,12 @@ public class CardServiceImpl implements CardService {
     private final Long cardBase = 10000_0000_0000L;
     private final String cardFormat = "%012d";
     private final Integer cardDuration = 2;
-    private final CardDao cardDao = new CardDaoImpl();
+    private final CardDao cardDao = new CardDaoJdbc();
 
     @Override
     public Card create(Card card) {
         card.setNumber(bankCode + String.format(cardFormat, (long) (Math.random() * cardBase)));
-        card.setExpiry(LocalDate.now().plusYears(cardDuration));
+//        card.setExpiry(LocalDate.now().plusYears(cardDuration));
         return cardDao.create(card);
     }
 
@@ -43,14 +40,14 @@ public class CardServiceImpl implements CardService {
     @Override
     public void blockCard(Long id) {
         Card card = cardDao.get(id).get();
-        card.setStatus(ActivityStatus.BLOCKED);
+        card.setActivityStatusId(2L);
         cardDao.update(card);
     }
 
     @Override
     public void unblockCard(Long id) {
         Card card = cardDao.get(id).get();
-        card.setStatus(ActivityStatus.ACTIVE);
+        card.setActivityStatusId(1L);
         cardDao.update(card);
     }
 
@@ -76,11 +73,11 @@ public class CardServiceImpl implements CardService {
         }
     }
 
-    @Override
-    public BigDecimal convert(Currency sender, Currency recipient, BigDecimal payment) {
-        return payment.multiply(sender.getConversionRate())
-                .multiply(recipient.getConversionRate());
-    }
+//    @Override
+//    public BigDecimal convert(Currency sender, Currency recipient, BigDecimal payment) {
+//        return payment.multiply(sender.getConversionRate())
+//                .multiply(recipient.getConversionRate());
+//    }
 
     @Override
     public Card update(Card card) {

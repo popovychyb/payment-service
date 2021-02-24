@@ -13,7 +13,7 @@
         <th>Recipient Card Id</th>
         <th>Payment</th>
         <th>Bill Status</th>
-        <th>Create Time</th>
+<%--        <th>Create Time</th>--%>
         <th>Delete</th>
     </tr>
     <c:forEach var="bill" items="${bills}">
@@ -31,11 +31,21 @@
                 <c:out value="${bill.payment}"/>
             </td>
             <td>
-                <c:out value="${bill.billStatus}"/>
+                <c:choose>
+                    <c:when test="${bill.billStatusId == 1}">
+                        <c:out value="PREPARED"/>
+                    </c:when>
+                    <c:when test="${bill.billStatusId == 2}">
+                        <c:out value="SENT"/>
+                    </c:when>
+                    <c:otherwise>
+                        <c:out value="REJECTED"/>
+                    </c:otherwise>
+                </c:choose>
             </td>
-            <td>
-                <c:out value="${bill.createTime}"/>
-            </td>
+<%--            <td>--%>
+<%--                <c:out value="${bill.createTime}"/>--%>
+<%--            </td>--%>
             <td>
                 <a href="${pageContext.request.contextPath}/bill/delete?id=${bill.id}">
                     Delete</a>

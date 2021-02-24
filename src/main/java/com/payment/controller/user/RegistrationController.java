@@ -1,11 +1,9 @@
 package com.payment.controller.user;
 
 import com.payment.model.User;
-import com.payment.model.enums.Role;
 import com.payment.service.UserService;
 import com.payment.service.impl.UserServiceImpl;
 import java.io.IOException;
-import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +31,7 @@ public class RegistrationController extends HttpServlet {
 
         if (pwd.equals(pwdRepeat)) {
             User user = new User(firstName, lastName, email, pwd);
-            user.setRoles(Set.of(Role.of("USER")));
+            user.setRoleId(1L);
             userService.create(user);
             resp.sendRedirect(req.getContextPath() + "/");
         } else {

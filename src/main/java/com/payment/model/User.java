@@ -1,27 +1,23 @@
 package com.payment.model;
 
-import com.payment.model.enums.ActivityStatus;
-import com.payment.model.enums.Role;
-import java.time.LocalDateTime;
-import java.util.Set;
-
 public class User {
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-    private Set<Role> roles;
-    private ActivityStatus status;
-    private LocalDateTime createTime;
+    private Long roleId;
+    private Long activityStatusId;
+//    private LocalDateTime createTime;
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.status = ActivityStatus.ACTIVE;
-        this.createTime = LocalDateTime.now();
+        this.roleId = 1L;
+        this.activityStatusId = 1L;
+        //this.createTime = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -64,28 +60,29 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
-    public LocalDateTime getCreateTime() {
-        return createTime;
+//    public LocalDateTime getCreateTime() {
+//        return createTime;
+//    }
+
+//    public void setCreateTime(LocalDateTime createTime) {
+//        this.createTime = createTime;
+//    }
+
+
+    public Long getActivityStatusId() {
+        return activityStatusId;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public ActivityStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ActivityStatus status) {
-        this.status = status;
+    public void setActivityStatusId(Long activityStatusId) {
+        this.activityStatusId = activityStatusId;
     }
 
     @Override
@@ -96,8 +93,9 @@ public class User {
                 + ", lastName='" + lastName + '\''
                 + ", email='" + email + '\''
                 + ", password='" + password + '\''
-                + ", role=" + roles
-                + ", status=" + status
-                + ", createTime=" + createTime + '}';
+                + ", role=" + roleId
+                + ", activityStatusId=" + activityStatusId
+//                + ", createTime=" + createTime
+                + '}';
     }
 }
