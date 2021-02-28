@@ -11,7 +11,6 @@ public class User {
     private String password;
     private Long roleId;
     private Long activityStatusId;
-//    private LocalDateTime createTime;
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
@@ -20,7 +19,6 @@ public class User {
         this.password = password;
         this.roleId = (long) Role.valueOf("CLIENT").ordinal();
         this.activityStatusId = (long) ActivityStatus.valueOf("ACTIVE").ordinal();
-        //this.createTime = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -71,15 +69,6 @@ public class User {
         this.roleId = roleId;
     }
 
-//    public LocalDateTime getCreateTime() {
-//        return createTime;
-//    }
-
-//    public void setCreateTime(LocalDateTime createTime) {
-//        this.createTime = createTime;
-//    }
-
-
     public Long getActivityStatusId() {
         return activityStatusId;
     }
@@ -98,7 +87,6 @@ public class User {
                 + ", password='" + password + '\''
                 + ", role=" + roleId
                 + ", activityStatusId=" + activityStatusId
-//                + ", createTime=" + createTime
                 + '}';
     }
 }

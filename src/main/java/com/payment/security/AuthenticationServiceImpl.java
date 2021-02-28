@@ -5,7 +5,7 @@ import com.payment.model.User;
 import com.payment.service.UserService;
 import com.payment.service.impl.UserServiceImpl;
 
-public class AuthenticationServiceImpl implements AuthenticationService{
+public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserService userService = new UserServiceImpl();
 
     @Override
@@ -13,7 +13,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
             throws AuthenticationException {
         User user = userService.findByEmail(email).orElseThrow(() ->
                 new AuthenticationException("Incorrect email or password"));
-        if(user.getPassword().equals(password)){
+        if (user.getPassword().equals(password)) {
             return user;
         }
         throw new AuthenticationException("Incorrect email or password");

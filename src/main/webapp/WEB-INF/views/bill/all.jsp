@@ -13,7 +13,6 @@
         <th>Recipient Card Id</th>
         <th>Payment</th>
         <th>Bill Status</th>
-<%--        <th>Create Time</th>--%>
         <th>Delete</th>
     </tr>
     <c:forEach var="bill" items="${bills}">
@@ -43,9 +42,6 @@
                     </c:otherwise>
                 </c:choose>
             </td>
-<%--            <td>--%>
-<%--                <c:out value="${bill.createTime}"/>--%>
-<%--            </td>--%>
             <td>
                 <a href="${pageContext.request.contextPath}/bill/delete?id=${bill.id}">
                     Delete</a>

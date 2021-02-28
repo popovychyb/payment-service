@@ -35,7 +35,6 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket update(Ticket ticket) {
-//        ticket.setLastUpdate(LocalDateTime.now());
         return ticketDao.update(ticket);
     }
 

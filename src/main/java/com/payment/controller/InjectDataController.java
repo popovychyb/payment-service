@@ -28,7 +28,8 @@ public class InjectDataController extends HttpServlet {
     private final BillService billService = new BillServiceImpl();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         User bob = new User("Bob", "Smith", "bob@mail.com", "qwerty");
         User lisa = new User("Lisa", "Bing", "lisa@mail.com", "12345");
         User admin = new User("John", "Anderson", "admin@payment.com", "1");

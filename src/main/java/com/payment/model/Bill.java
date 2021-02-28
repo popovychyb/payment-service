@@ -9,23 +9,13 @@ public class Bill {
     private Long recipientCardId;
     private BigDecimal payment;
     private Long billStatusId;
-    //private LocalDateTime createTime;
 
     public Bill(Long senderCardId, Long recipientCardId, BigDecimal payment) {
         this.senderCardId = senderCardId;
         this.recipientCardId = recipientCardId;
         this.payment = payment;
         this.billStatusId = (long) BillStatus.valueOf("PREPARED").ordinal();
-//        this.createTime = LocalDateTime.now();
     }
-
-//    public LocalDateTime getCreateTime() {
-//        return createTime;
-//    }
-
-//    public void setCreateTime(LocalDateTime createTime) {
-//        this.createTime = createTime;
-//    }
 
     public Long getId() {
         return id;
@@ -75,7 +65,6 @@ public class Bill {
                 + ", recipientCardId=" + recipientCardId
                 + ", payment=" + payment
                 + ", billStatusId=" + billStatusId
-//                + ", createTime=" + createTime
                 + '}';
     }
 }

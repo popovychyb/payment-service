@@ -7,7 +7,7 @@ public enum BillStatus {
     SENT,
     REJECTED;
 
-    public static BillStatus getBillStatus(Bill bill){
-        return BillStatus.values()[Math.toIntExact(bill.getBillStatusId())] ;
+    public static BillStatus getBillStatus(Bill bill) {
+        return BillStatus.values()[Math.toIntExact(bill.getBillStatusId())];
     }
 }

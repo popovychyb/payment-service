@@ -14,6 +14,4 @@ public interface CardService extends GenericService<Card, Long> {
     void replenish(Long id, BigDecimal amount);
 
     void deduct(Long id, BigDecimal amount);
-
-//    BigDecimal convert(Currency sender, Currency recipient, BigDecimal payment);
 }

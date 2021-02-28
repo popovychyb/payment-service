@@ -1,9 +1,9 @@
 package com.payment.util;
 
-import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
 public class ConnectionUtil {
     private static final Logger LOGGER = Logger.getLogger(ConnectionUtil.class);

@@ -18,7 +18,7 @@ public class BillDaoJdbc implements BillDao {
     public List<Bill> getBillsBySenderAccount(Long id) {
         String selectBillsBySenderQuery = "SELECT * FROM bills WHERE sender_card_id = ?;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(selectBillsBySenderQuery)) {
+                PreparedStatement statement = conn.prepareStatement(selectBillsBySenderQuery)) {
             statement.setLong(1, id);
             List<Bill> bills = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
@@ -37,7 +37,7 @@ public class BillDaoJdbc implements BillDao {
     public List<Bill> getBillsByRecipientAccount(Long id) {
         String selectBillsBySenderQuery = "SELECT * FROM bills WHERE recipient_card_id = ?;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(selectBillsBySenderQuery)) {
+                PreparedStatement statement = conn.prepareStatement(selectBillsBySenderQuery)) {
             statement.setLong(1, id);
             List<Bill> bills = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
@@ -54,9 +54,10 @@ public class BillDaoJdbc implements BillDao {
 
     @Override
     public List<Bill> getBillsByAccount(Long id) {
-        String selectBillsBySenderQuery = "SELECT * FROM bills WHERE (recipient_card_id = ?) OR (sender_card_id = ?);";
+        String selectBillsBySenderQuery = "SELECT * FROM bills WHERE (recipient_card_id = ?) "
+                + "OR (sender_card_id = ?);";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(selectBillsBySenderQuery)) {
+                PreparedStatement statement = conn.prepareStatement(selectBillsBySenderQuery)) {
             statement.setLong(1, id);
             statement.setLong(2, id);
             List<Bill> bills = new ArrayList<>();
@@ -74,10 +75,12 @@ public class BillDaoJdbc implements BillDao {
 
     @Override
     public Bill create(Bill bill) {
-        String query = "INSERT INTO bills (sender_card_id, recipient_card_id, payment, bill_status_id) "
-                + "VALUES (?, ?, ?, ?);";
+        String query =
+                "INSERT INTO bills (sender_card_id, recipient_card_id, "
+                        + "payment, bill_status_id) VALUES (?, ?, ?, ?);";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement statement =
+                        conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setLong(1, bill.getSenderCardId());
             statement.setLong(2, bill.getRecipientCardId());
             statement.setBigDecimal(3, bill.getPayment());
@@ -97,7 +100,7 @@ public class BillDaoJdbc implements BillDao {
     public Optional<Bill> get(Long id) {
         String selectBillQuery = "SELECT * FROM bills WHERE id = ?;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(selectBillQuery)) {
+                PreparedStatement statement = conn.prepareStatement(selectBillQuery)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -122,7 +125,7 @@ public class BillDaoJdbc implements BillDao {
     public List<Bill> getAll() {
         String selectAllBillsQuery = "SELECT * FROM bills;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(selectAllBillsQuery)) {
+                PreparedStatement statement = conn.prepareStatement(selectAllBillsQuery)) {
             List<Bill> bills = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             Bill bill = null;
@@ -138,10 +141,10 @@ public class BillDaoJdbc implements BillDao {
 
     @Override
     public Bill update(Bill bill) {
-        String updateBillQuery = "UPDATE bills SET sender_card_id = ?, recipient_card_id = ?, " +
-                "payment = ?, bill_status_id = ? WHERE id = ?;";
+        String updateBillQuery = "UPDATE bills SET sender_card_id = ?, recipient_card_id = ?, "
+                + "payment = ?, bill_status_id = ? WHERE id = ?;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(updateBillQuery)) {
+                PreparedStatement statement = conn.prepareStatement(updateBillQuery)) {
             statement.setLong(1, bill.getSenderCardId());
             statement.setLong(2, bill.getRecipientCardId());
             statement.setBigDecimal(3, bill.getPayment());
@@ -158,7 +161,7 @@ public class BillDaoJdbc implements BillDao {
     public boolean delete(Long id) {
         String deleteBillQuery = "DELETE FROM bills WHERE id = ?;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(deleteBillQuery)) {
+                PreparedStatement statement = conn.prepareStatement(deleteBillQuery)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {

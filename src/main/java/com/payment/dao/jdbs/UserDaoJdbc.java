@@ -31,10 +31,11 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public User create(User user) {
-        String query = "INSERT INTO users (first_name, last_name, email, password, role_id, activity_status_id) "
-                + "VALUES (?, ?, ?, ?, ?, ?);";
+        String query = "INSERT INTO users (first_name, last_name, email, password, "
+                + "role_id, activity_status_id) VALUES (?, ?, ?, ?, ?, ?);";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement statement =
+                        conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getEmail());
@@ -56,7 +57,7 @@ public class UserDaoJdbc implements UserDao {
     public Optional<User> get(Long id) {
         String selectUserQuery = "SELECT * FROM users WHERE id = ?;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(selectUserQuery)) {
+                PreparedStatement statement = conn.prepareStatement(selectUserQuery)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -72,11 +73,11 @@ public class UserDaoJdbc implements UserDao {
     public List<User> getAll() {
         String selectAllUsersQuery = "SELECT * FROM users;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(selectAllUsersQuery)) {
+                PreparedStatement statement = conn.prepareStatement(selectAllUsersQuery)) {
             List<User> users = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             User user = null;
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 user = getUserFromResultSet(resultSet).get();
                 users.add(user);
             }
@@ -88,10 +89,10 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public User update(User user) {
-        String updateUserQuery = "UPDATE users SET first_name = ?, last_name = ?, email = ?, password = ?, " +
-                "role_id = ?, activity_status_id = ? WHERE id = ?;";
+        String updateUserQuery = "UPDATE users SET first_name = ?, last_name = ?, "
+                + "email = ?, password = ?, role_id = ?, activity_status_id = ? WHERE id = ?;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(updateUserQuery)) {
+                PreparedStatement statement = conn.prepareStatement(updateUserQuery)) {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getEmail());
@@ -110,7 +111,7 @@ public class UserDaoJdbc implements UserDao {
     public boolean delete(Long id) {
         String deleteUserQuery = "DELETE FROM users WHERE id = ?;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(deleteUserQuery)) {
+                PreparedStatement statement = conn.prepareStatement(deleteUserQuery)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {

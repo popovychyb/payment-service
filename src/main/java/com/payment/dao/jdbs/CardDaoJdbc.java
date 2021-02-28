@@ -18,12 +18,12 @@ public class CardDaoJdbc implements CardDao {
     public List<Card> getUserCards(Long id) {
         String selectUserCardsQuery = "SELECT * FROM cards WHERE users_id = ?;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(selectUserCardsQuery)) {
+                PreparedStatement statement = conn.prepareStatement(selectUserCardsQuery)) {
             statement.setLong(1, id);
             List<Card> cards = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             Card card = null;
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 card = getCardFromResultSet(resultSet).get();
                 cards.add(card);
             }
@@ -35,17 +35,18 @@ public class CardDaoJdbc implements CardDao {
 
     @Override
     public Card create(Card card) {
-        String query = "INSERT INTO cards (card_number, users_id, balance, title, activity_status_id) "
-                + "VALUES (?, ?, ?, ?, ?);";
-        try(Connection conn = ConnectionUtil.getConnection();
-            PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
+        String query = "INSERT INTO cards (card_number, users_id, balance, "
+                + "title, activity_status_id) VALUES (?, ?, ?, ?, ?);";
+        try (Connection conn = ConnectionUtil.getConnection();
+                PreparedStatement statement =
+                        conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, card.getNumber());
             statement.setLong(2, card.getIdUser());
             statement.setBigDecimal(3, card.getBalance());
             statement.setString(4, card.getTitle());
             statement.setLong(5, card.getActivityStatusId());
             statement.executeUpdate();
-            try (ResultSet resultSet = statement.getGeneratedKeys()){
+            try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 resultSet.next();
                 card.setId(resultSet.getLong(1));
                 return card;
@@ -59,7 +60,7 @@ public class CardDaoJdbc implements CardDao {
     public Optional<Card> get(Long id) {
         String selectCardQuery = "SELECT * FROM cards WHERE id = ?;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(selectCardQuery)) {
+                PreparedStatement statement = conn.prepareStatement(selectCardQuery)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -85,11 +86,11 @@ public class CardDaoJdbc implements CardDao {
     public List<Card> getAll() {
         String selectAllCardsQuery = "SELECT * FROM cards;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(selectAllCardsQuery)) {
+                PreparedStatement statement = conn.prepareStatement(selectAllCardsQuery)) {
             List<Card> cards = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             Card card = null;
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 card = getCardFromResultSet(resultSet).get();
                 cards.add(card);
             }
@@ -101,10 +102,10 @@ public class CardDaoJdbc implements CardDao {
 
     @Override
     public Card update(Card card) {
-        String updateCardQuery = "UPDATE cards SET card_number = ?, users_id = ?, balance = ?, " +
-                "title = ?, activity_status_id = ? WHERE id = ?;";
-        try(Connection conn = ConnectionUtil.getConnection();
-            PreparedStatement statement = conn.prepareStatement(updateCardQuery)){
+        String updateCardQuery = "UPDATE cards SET card_number = ?, users_id = ?, "
+                + "balance = ?, title = ?, activity_status_id = ? WHERE id = ?;";
+        try (Connection conn = ConnectionUtil.getConnection();
+                PreparedStatement statement = conn.prepareStatement(updateCardQuery)) {
             statement.setString(1, card.getNumber());
             statement.setLong(2, card.getIdUser());
             statement.setBigDecimal(3, card.getBalance());
@@ -122,7 +123,7 @@ public class CardDaoJdbc implements CardDao {
     public boolean delete(Long id) {
         String deleteCardQuery = "DELETE FROM cards WHERE id = ?;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(deleteCardQuery)) {
+                PreparedStatement statement = conn.prepareStatement(deleteCardQuery)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {

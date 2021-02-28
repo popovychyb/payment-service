@@ -18,12 +18,13 @@ public class TicketDaoJdbc implements TicketDao {
     public Ticket create(Ticket ticket) {
         String query = "INSERT INTO tickets (card_id, ticket_status_id) "
                 + "VALUES (?, ?);";
-        try(Connection conn = ConnectionUtil.getConnection();
-            PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
+        try (Connection conn = ConnectionUtil.getConnection();
+                PreparedStatement statement =
+                        conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setLong(1, ticket.getCardId());
             statement.setLong(2, ticket.getTicketStatusId());
             statement.executeUpdate();
-            try (ResultSet resultSet = statement.getGeneratedKeys()){
+            try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 resultSet.next();
                 ticket.setId(resultSet.getLong(1));
                 return ticket;
@@ -37,7 +38,7 @@ public class TicketDaoJdbc implements TicketDao {
     public Optional<Ticket> get(Long id) {
         String selectTicketQuery = "SELECT * FROM tickets WHERE id = ?;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(selectTicketQuery)) {
+                PreparedStatement statement = conn.prepareStatement(selectTicketQuery)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -49,7 +50,8 @@ public class TicketDaoJdbc implements TicketDao {
         }
     }
 
-    private Optional<Ticket> getTicketFromResultSet(ResultSet resultSet) throws SQLException {
+    private Optional<Ticket> getTicketFromResultSet(ResultSet resultSet)
+            throws SQLException {
         Ticket ticket = new Ticket(resultSet.getLong("card_id"));
         ticket.setId(resultSet.getLong("id"));
         ticket.setTicketStatusId(resultSet.getLong("ticket_status_id"));
@@ -60,11 +62,11 @@ public class TicketDaoJdbc implements TicketDao {
     public List<Ticket> getAll() {
         String selectAllTicketsQuery = "SELECT * FROM tickets;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(selectAllTicketsQuery)) {
+                PreparedStatement statement = conn.prepareStatement(selectAllTicketsQuery)) {
             List<Ticket> tickets = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             Ticket ticket = null;
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 ticket = getTicketFromResultSet(resultSet).get();
                 tickets.add(ticket);
             }
@@ -76,10 +78,10 @@ public class TicketDaoJdbc implements TicketDao {
 
     @Override
     public Ticket update(Ticket ticket) {
-        String updateTicketQuery = "UPDATE tickets SET card_id = ?, ticket_status_id = ? " +
-                " WHERE id = ?;";
-        try(Connection conn = ConnectionUtil.getConnection();
-            PreparedStatement statement = conn.prepareStatement(updateTicketQuery)){
+        String updateTicketQuery = "UPDATE tickets SET card_id = ?, "
+                + "ticket_status_id = ? WHERE id = ?;";
+        try (Connection conn = ConnectionUtil.getConnection();
+                PreparedStatement statement = conn.prepareStatement(updateTicketQuery)) {
             statement.setLong(1, ticket.getCardId());
             statement.setLong(2, ticket.getTicketStatusId());
             statement.setLong(3, ticket.getId());
@@ -94,7 +96,7 @@ public class TicketDaoJdbc implements TicketDao {
     public boolean delete(Long id) {
         String deleteTicketQuery = "DELETE FROM tickets WHERE id = ?;";
         try (Connection conn = ConnectionUtil.getConnection();
-             PreparedStatement statement = conn.prepareStatement(deleteTicketQuery)) {
+                PreparedStatement statement = conn.prepareStatement(deleteTicketQuery)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {

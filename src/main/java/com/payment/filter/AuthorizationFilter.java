@@ -4,7 +4,6 @@ import com.payment.model.User;
 import com.payment.model.enums.Role;
 import com.payment.service.UserService;
 import com.payment.service.impl.UserServiceImpl;
-import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -17,12 +16,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 public class AuthorizationFilter implements Filter {
-    private Map<String, List<Role>> protectedUrls = new HashMap<>();
     private static final String USER_ID = "user_id";
-    private  final UserService userService = new UserServiceImpl();
     private static final Logger LOGGER = Logger.getLogger(AuthorizationFilter.class);
+    private final UserService userService = new UserServiceImpl();
+    private final Map<String, List<Role>> protectedUrls = new HashMap<>();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

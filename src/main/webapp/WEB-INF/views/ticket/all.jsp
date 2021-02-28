@@ -11,10 +11,6 @@
         <th>Id</th>
         <th>CardId</th>
         <th>Ticket Status</th>
-<%--        <th>CreateTime</th>--%>
-<%--        <th>Last Update</th>--%>
-<%--        <th>Ticket Message</th>--%>
-<%--        <th>Response Message</th>--%>
         <th>Delete</th>
     </tr>
     <c:forEach var="ticket" items="${tickets}">
@@ -38,18 +34,6 @@
                     </c:otherwise>
                 </c:choose>
             </td>
-<%--            <td>--%>
-<%--                <c:out value="${ticket.createTime}"/>--%>
-<%--            </td>--%>
-<%--            <td>--%>
-<%--                <c:out value="${ticket.lastUpdate}"/>--%>
-<%--            </td>--%>
-<%--            <td>--%>
-<%--                <c:out value="${ticket.ticketMessage}"/>--%>
-<%--            </td>--%>
-<%--            <td>--%>
-<%--                <c:out value="${ticket.responseMessage}"/>--%>
-<%--            </td>--%>
             <td>
                 <a href="${pageContext.request.contextPath}/ticket/delete?id=${ticket.id}">
                     Delete</a>

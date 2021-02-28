@@ -55,12 +55,6 @@ public class BillServiceImpl implements BillService {
         }
         Card recipient = cardService.get(bill.getRecipientCardId()).get();
         cardService.deduct(sender.getId(), payment);
-//        if (sender.getCurrency() != null
-//                && recipient.getCurrency() != null
-//                && sender.getCurrency() != recipient.getCurrency()) {
-//            payment = cardService.convert(sender.getCurrency(),
-//                    recipient.getCurrency(), payment);
-//        }
         cardService.replenish(recipient.getId(), payment);
         bill.setBillStatusId(1L);
         update(bill);

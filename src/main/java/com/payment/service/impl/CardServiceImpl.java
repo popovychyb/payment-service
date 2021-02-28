@@ -12,13 +12,11 @@ public class CardServiceImpl implements CardService {
     private final Long bankCode = 4578L;
     private final Long cardBase = 10000_0000_0000L;
     private final String cardFormat = "%012d";
-    private final Integer cardDuration = 2;
     private final CardDao cardDao = new CardDaoJdbc();
 
     @Override
     public Card create(Card card) {
         card.setNumber(bankCode + String.format(cardFormat, (long) (Math.random() * cardBase)));
-//        card.setExpiry(LocalDate.now().plusYears(cardDuration));
         return cardDao.create(card);
     }
 
@@ -72,12 +70,6 @@ public class CardServiceImpl implements CardService {
             update(card);
         }
     }
-
-//    @Override
-//    public BigDecimal convert(Currency sender, Currency recipient, BigDecimal payment) {
-//        return payment.multiply(sender.getConversionRate())
-//                .multiply(recipient.getConversionRate());
-//    }
 
     @Override
     public Card update(Card card) {

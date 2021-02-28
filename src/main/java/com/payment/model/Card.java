@@ -13,13 +13,8 @@ public class Card {
     private String number;
     private Long idUser;
     private BigDecimal balance;
-//    private LocalDate expiry;
     private String title;
-//    private String cvv2;
-//    private String pinCode;
-//    private Currency currency;
     private Long activityStatusId;
-//    private LocalDateTime createTime;
 
     public Card(String number) {
         this.number = number;
@@ -29,20 +24,8 @@ public class Card {
         this.idUser = idUser;
         this.balance = new BigDecimal("0");
         this.title = "";
-//        this.cvv2 = String.format(cvvFormat, (int) (Math.random() * cvvBase));
-//        this.pinCode = String.format(pinFormat, (int) (Math.random() * pinBase));
-//        this.currency = currency;
         this.activityStatusId = (long) ActivityStatus.valueOf("ACTIVE").ordinal();
-//        this.createTime = LocalDateTime.now();
     }
-
-//    public LocalDateTime getCreateTime() {
-//        return createTime;
-//    }
-
-//    public void setCreateTime(LocalDateTime createTime) {
-//        this.createTime = createTime;
-//    }
 
     public Long getId() {
         return id;
@@ -76,14 +59,6 @@ public class Card {
         this.balance = balance;
     }
 
-//    public LocalDate getExpiry() {
-//        return expiry;
-//    }
-
-//    public void setExpiry(LocalDate expiry) {
-//        this.expiry = expiry;
-//    }
-
     public String getTitle() {
         return title;
     }
@@ -91,31 +66,6 @@ public class Card {
     public void setTitle(String title) {
         this.title = title;
     }
-
-//    public String getCvv2() {
-//        return cvv2;
-//    }
-//
-//    public void setCvv2(String cvv2) {
-//        this.cvv2 = cvv2;
-//    }
-//
-//    public String getPinCode() {
-//        return pinCode;
-//    }
-//
-//    public void setPinCode(String pinCode) {
-//        this.pinCode = pinCode;
-//    }
-//
-//    public Currency getCurrency() {
-//        return currency;
-//    }
-//
-//    public void setCurrency(Currency currency) {
-//        this.currency = currency;
-//    }
-
 
     public Long getActivityStatusId() {
         return activityStatusId;
@@ -132,13 +82,8 @@ public class Card {
                 + ", number='" + number + '\''
                 + ", idUser=" + idUser
                 + ", balance=" + balance
-//                + ", expiry=" + expiry
                 + ", title='" + title + '\''
-//                + ", cvv2='" + cvv2 + '\''
-//                + ", pinCode='" + pinCode + '\''
-//                + ", currency=" + currency
                 + ", activityStatusId=" + activityStatusId
-//                + ", createTime=" + createTime
                 + '}';
     }
 }

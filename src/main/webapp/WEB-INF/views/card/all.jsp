@@ -12,13 +12,8 @@
         <th>Number</th>
         <th>IdUser</th>
         <th>Balance</th>
-<%--        <th>Expiry</th>--%>
         <th>Title</th>
-<%--        <th>Cvv2</th>--%>
-<%--        <th>PinCode</th>--%>
-<%--        <th>Currency</th>--%>
         <th>Status</th>
-<%--        <th>CreateTime</th>--%>
         <th>Block/Unblock</th>
         <th>Delete</th>
     </tr>
@@ -36,21 +31,9 @@
             <td>
                 <c:out value="${card.balance}"/>
             </td>
-<%--            <td>--%>
-<%--                <c:out value="${card.expiry}"/>--%>
-<%--            </td>--%>
             <td>
                 <c:out value="${card.title}"/>
             </td>
-<%--            <td>--%>
-<%--                <c:out value="${card.cvv2}"/>--%>
-<%--            </td>--%>
-<%--            <td>--%>
-<%--                <c:out value="${card.pinCode}"/>--%>
-<%--            </td>--%>
-<%--            <td>--%>
-<%--                <c:out value="${card.currency}"/>--%>
-<%--            </td>--%>
             <td>
                 <c:choose>
                     <c:when test="${card.activityStatusId == 0}">
@@ -64,9 +47,6 @@
                     </c:otherwise>
                 </c:choose>
             </td>
-<%--            <td>--%>
-<%--                <c:out value="${card.createTime}"/>--%>
-<%--            </td>--%>
             <td>
                 <a href="${pageContext.request.contextPath}/card/block?id=${card.id}">
                     Block/Unblock</a>

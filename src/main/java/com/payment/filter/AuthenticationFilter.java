@@ -28,13 +28,13 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
-        if(skipUrls.contains(req.getServletPath())){
+        if (skipUrls.contains(req.getServletPath())) {
             chain.doFilter(req, resp);
             return;
         }
 
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        if(userId == null){
+        if (userId == null) {
             resp.sendRedirect("/login");
             return;
         }

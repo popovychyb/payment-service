@@ -50,24 +50,6 @@ public class UserServiceImpl implements UserService {
         update(user);
     }
 
-//    @Override
-//    public void addAdminRole(Long id) {
-//        User user = userDao.get(id).get();
-//        Set<Role> roles = user.getRole();
-//        roles.add(Role.of("ADMIN"));
-//        user.setRole(roles);
-//        update(user);
-//    }
-//
-//    @Override
-//    public void addUserRole(Long id) {
-//        User user = userDao.get(id).get();
-//        Set<Role> roles = user.getRole();
-//        roles.add(Role.of("USER"));
-//        user.setRole(roles);
-//        update(user);
-//    }
-
     @Override
     public Optional<User> findByEmail(String email) {
         return userDao.findByEmail(email);

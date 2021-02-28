@@ -14,7 +14,6 @@
         <th>Email</th>
         <th>Role</th>
         <th>Status</th>
-        <%--        <th>Create time</th>--%>
         <th>Block</th>
         <th>Delete</th>
     </tr>
@@ -55,9 +54,6 @@
                     </c:otherwise>
                 </c:choose>
             </td>
-                <%--            <td>--%>
-                <%--                <c:out value="${user.createTime}"/>--%>
-                <%--            </td>--%>
             <td>
                 <a href="${pageContext.request.contextPath}/user/block?id=${user.id}">
                     Block/Unblock</a>
