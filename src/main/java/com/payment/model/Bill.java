@@ -1,5 +1,6 @@
 package com.payment.model;
 
+import com.payment.model.enums.BillStatus;
 import java.math.BigDecimal;
 
 public class Bill {
@@ -14,7 +15,7 @@ public class Bill {
         this.senderCardId = senderCardId;
         this.recipientCardId = recipientCardId;
         this.payment = payment;
-        this.billStatusId = 1L;
+        this.billStatusId = (long) BillStatus.valueOf("PREPARED").ordinal();
 //        this.createTime = LocalDateTime.now();
     }
 

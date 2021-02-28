@@ -1,5 +1,6 @@
 package com.payment.controller.user;
 
+import com.payment.model.enums.ActivityStatus;
 import com.payment.service.UserService;
 import com.payment.service.impl.UserServiceImpl;
 import java.io.IOException;
@@ -17,7 +18,8 @@ public class ChangeUserStatusController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         Long id = Long.valueOf(req.getParameter("id"));
-        if (userService.get(id).get().getActivityStatusId().equals(1L)) {
+        if (userService.get(id).get().getActivityStatusId()
+                .equals((long) ActivityStatus.valueOf("ACTIVE").ordinal())) {
             userService.blockUser(id);
         } else {
             userService.unblockUser(id);

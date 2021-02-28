@@ -1,6 +1,6 @@
 package com.payment;
 
-import com.payment.model.enums.BillStatus;
+import com.payment.model.enums.ActivityStatus;
 import com.payment.service.BillService;
 import com.payment.service.impl.BillServiceImpl;
 
@@ -8,9 +8,13 @@ public class Main {
     public static void main(String[] args) {
         BillService billService = new BillServiceImpl();
 
-        System.out.println(BillStatus.getBillStatus(billService.get(1L).get()));
-        System.out.println(BillStatus.getBillStatus(billService.get(2L).get()));
-        System.out.println(BillStatus.getBillStatus(billService.get(3L).get()));
+        System.out.println((long) ActivityStatus.valueOf("ACTIVE").ordinal());
+        System.out.println((long) ActivityStatus.valueOf("BLOCKED").ordinal());
+        System.out.println((long) ActivityStatus.valueOf("CONSIDERATION").ordinal());
+
+//        System.out.println(BillStatus.getBillStatus(billService.get(1L).get()));
+//        System.out.println(BillStatus.getBillStatus(billService.get(2L).get()));
+//        System.out.println(BillStatus.getBillStatus(billService.get(3L).get()));
 
 //        UserService userService = new UserServiceImpl();
 ////        User bob = new User("Bob", "Smith", "bob4@mail.com", "qwerty");

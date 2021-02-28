@@ -40,14 +40,14 @@ public class CardServiceImpl implements CardService {
     @Override
     public void blockCard(Long id) {
         Card card = cardDao.get(id).get();
-        card.setActivityStatusId(2L);
+        card.setActivityStatusId(1L);
         cardDao.update(card);
     }
 
     @Override
     public void unblockCard(Long id) {
         Card card = cardDao.get(id).get();
-        card.setActivityStatusId(1L);
+        card.setActivityStatusId(0L);
         cardDao.update(card);
     }
 

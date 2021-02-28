@@ -1,5 +1,8 @@
 package com.payment.model;
 
+import com.payment.model.enums.ActivityStatus;
+import com.payment.model.enums.Role;
+
 public class User {
     private Long id;
     private String firstName;
@@ -15,8 +18,8 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.roleId = 1L;
-        this.activityStatusId = 1L;
+        this.roleId = (long) Role.valueOf("CLIENT").ordinal();
+        this.activityStatusId = (long) ActivityStatus.valueOf("ACTIVE").ordinal();
         //this.createTime = LocalDateTime.now();
     }
 

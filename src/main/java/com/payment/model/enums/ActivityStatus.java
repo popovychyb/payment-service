@@ -9,10 +9,10 @@ public enum ActivityStatus{
     CONSIDERATION;
 
     public static ActivityStatus getActivityStatus(User user){
-        return ActivityStatus.values()[Math.toIntExact(user.getActivityStatusId()) - 1];
+        return ActivityStatus.values()[Math.toIntExact(user.getActivityStatusId())];
     }
 
     public static ActivityStatus getActivityStatus(Card card){
-        return ActivityStatus.values()[Math.toIntExact(card.getActivityStatusId()) - 1];
+        return ActivityStatus.values()[Math.toIntExact(card.getActivityStatusId())];
     }
 }

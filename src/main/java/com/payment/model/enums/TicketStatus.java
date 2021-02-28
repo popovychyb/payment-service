@@ -8,7 +8,7 @@ public enum TicketStatus{
     DECLINED;
 
     public static TicketStatus getTicketStatus(Ticket ticket){
-        return TicketStatus.values()[Math.toIntExact(ticket.getTicketStatusId()) - 1];
+        return TicketStatus.values()[Math.toIntExact(ticket.getTicketStatusId())];
     }
 }
 

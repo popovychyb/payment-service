@@ -4,6 +4,8 @@ import com.payment.dao.TicketDao;
 import com.payment.dao.jdbs.TicketDaoJdbc;
 import com.payment.model.Card;
 import com.payment.model.Ticket;
+import com.payment.model.enums.ActivityStatus;
+import com.payment.model.enums.TicketStatus;
 import com.payment.service.CardService;
 import com.payment.service.TicketService;
 import java.util.List;
@@ -16,7 +18,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public Ticket create(Ticket ticket) {
         Card card = cardService.get(ticket.getCardId()).get();
-        card.setActivityStatusId(3L);
+        card.setActivityStatusId(2L);
         cardService.update(card);
         return ticketDao.create(ticket);
     }
@@ -48,11 +50,11 @@ public class TicketServiceImpl implements TicketService {
         Long cardId = ticket.getCardId();
         Card card = cardService.get(cardId).get();
         if (unblock) {
-            card.setActivityStatusId(1L);
-            ticket.setTicketStatusId(2L);
+            card.setActivityStatusId((long) ActivityStatus.valueOf("ACTIVE").ordinal());
+            ticket.setTicketStatusId((long) TicketStatus.valueOf("APPROVED").ordinal());
         } else {
-            card.setActivityStatusId(2L);
-            ticket.setTicketStatusId(3L);
+            card.setActivityStatusId((long) ActivityStatus.valueOf("BLOCKED").ordinal());
+            ticket.setTicketStatusId((long) TicketStatus.valueOf("DECLINED").ordinal());
         }
         update(ticket);
         cardService.update(card);

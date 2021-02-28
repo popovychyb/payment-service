@@ -1,5 +1,6 @@
 package com.payment.model;
 
+import com.payment.model.enums.ActivityStatus;
 import java.math.BigDecimal;
 
 public class Card {
@@ -31,7 +32,7 @@ public class Card {
 //        this.cvv2 = String.format(cvvFormat, (int) (Math.random() * cvvBase));
 //        this.pinCode = String.format(pinFormat, (int) (Math.random() * pinBase));
 //        this.currency = currency;
-        this.activityStatusId = 1L;
+        this.activityStatusId = (long) ActivityStatus.valueOf("ACTIVE").ordinal();
 //        this.createTime = LocalDateTime.now();
     }
 

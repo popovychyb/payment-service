@@ -1,5 +1,7 @@
 package com.payment.model;
 
+import com.payment.model.enums.TicketStatus;
+
 public class Ticket {
     private Long id;
     private Long cardId;
@@ -11,7 +13,7 @@ public class Ticket {
 
     public Ticket(Long cardId) {
         this.cardId = cardId;
-        this.ticketStatusId = 1L;
+        this.ticketStatusId = (long) TicketStatus.valueOf("NEW").ordinal();
 //        this.createTime = LocalDateTime.now();
     }
 

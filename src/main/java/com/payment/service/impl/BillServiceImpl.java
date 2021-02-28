@@ -50,7 +50,7 @@ public class BillServiceImpl implements BillService {
         BigDecimal payment = bill.getPayment();
         Card sender = cardService.get(bill.getSenderCardId()).get();
         if (sender.getBalance().compareTo(payment) < 0) {
-            bill.setBillStatusId(3L);
+            bill.setBillStatusId(2L);
             return;
         }
         Card recipient = cardService.get(bill.getRecipientCardId()).get();
@@ -62,7 +62,7 @@ public class BillServiceImpl implements BillService {
 //                    recipient.getCurrency(), payment);
 //        }
         cardService.replenish(recipient.getId(), payment);
-        bill.setBillStatusId(2L);
+        bill.setBillStatusId(1L);
         update(bill);
     }
 

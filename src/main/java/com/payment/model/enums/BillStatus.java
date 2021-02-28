@@ -8,6 +8,6 @@ public enum BillStatus {
     REJECTED;
 
     public static BillStatus getBillStatus(Bill bill){
-        return BillStatus.values()[Math.toIntExact(bill.getBillStatusId()) -1] ;
+        return BillStatus.values()[Math.toIntExact(bill.getBillStatusId())] ;
     }
 }

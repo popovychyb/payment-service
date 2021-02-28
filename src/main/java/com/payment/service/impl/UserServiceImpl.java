@@ -3,6 +3,7 @@ package com.payment.service.impl;
 import com.payment.dao.UserDao;
 import com.payment.dao.jdbs.UserDaoJdbc;
 import com.payment.model.User;
+import com.payment.model.enums.ActivityStatus;
 import com.payment.service.UserService;
 import java.util.List;
 import java.util.Optional;
@@ -38,14 +39,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void blockUser(Long id) {
         User user = userDao.get(id).get();
-        user.setActivityStatusId(2L);
+        user.setActivityStatusId((long) ActivityStatus.valueOf("BLOCKED").ordinal());
         update(user);
     }
 
     @Override
     public void unblockUser(Long id) {
         User user = userDao.get(id).get();
-        user.setActivityStatusId(1L);
+        user.setActivityStatusId((long) ActivityStatus.valueOf("ACTIVE").ordinal());
         update(user);
     }
 

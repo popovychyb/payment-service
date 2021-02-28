@@ -44,10 +44,10 @@
             </td>
             <td>
                 <c:choose>
-                    <c:when test="${user.activityStatusId == 1}">
+                    <c:when test="${user.activityStatusId == 0}">
                         <c:out value="ACTIVE"/>
                     </c:when>
-                    <c:when test="${user.activityStatusId == 2}">
+                    <c:when test="${user.activityStatusId == 1}">
                         <c:out value="BLOCKED"/>
                     </c:when>
                     <c:otherwise>

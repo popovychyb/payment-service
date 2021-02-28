@@ -32,10 +32,10 @@
             </td>
             <td>
                 <c:choose>
-                    <c:when test="${bill.billStatusId == 1}">
+                    <c:when test="${bill.billStatusId == 0}">
                         <c:out value="PREPARED"/>
                     </c:when>
-                    <c:when test="${bill.billStatusId == 2}">
+                    <c:when test="${bill.billStatusId == 1}">
                         <c:out value="SENT"/>
                     </c:when>
                     <c:otherwise>

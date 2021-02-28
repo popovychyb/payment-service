@@ -27,10 +27,10 @@
             </td>
             <td>
                 <c:choose>
-                    <c:when test="${ticket.ticketStatusId == 1}">
+                    <c:when test="${ticket.ticketStatusId == 0}">
                         <c:out value="NEW"/>
                     </c:when>
-                    <c:when test="${ticket.ticketStatusId == 2}">
+                    <c:when test="${ticket.ticketStatusId == 1}">
                         <c:out value="APPROVED"/>
                     </c:when>
                     <c:otherwise>
