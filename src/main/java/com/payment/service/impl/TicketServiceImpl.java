@@ -1,25 +1,24 @@
 package com.payment.service.impl;
 
 import com.payment.dao.TicketDao;
-import com.payment.dao.impl.TicketDaoImpl;
+import com.payment.dao.jdbs.TicketDaoJdbc;
 import com.payment.model.Card;
 import com.payment.model.Ticket;
+import com.payment.model.enums.ActivityStatus;
 import com.payment.model.enums.TicketStatus;
-import com.payment.model.enums.UserCardStatus;
 import com.payment.service.CardService;
 import com.payment.service.TicketService;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 public class TicketServiceImpl implements TicketService {
-    private final TicketDao ticketDao = new TicketDaoImpl();
+    private final TicketDao ticketDao = new TicketDaoJdbc();
     private final CardService cardService = new CardServiceImpl();
 
     @Override
     public Ticket create(Ticket ticket) {
         Card card = cardService.get(ticket.getCardId()).get();
-        card.setStatus(UserCardStatus.CONSIDERATION);
+        card.setActivityStatusId(2L);
         cardService.update(card);
         return ticketDao.create(ticket);
     }
@@ -36,7 +35,6 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket update(Ticket ticket) {
-        ticket.setLastUpdate(LocalDateTime.now());
         return ticketDao.update(ticket);
     }
 
@@ -51,11 +49,11 @@ public class TicketServiceImpl implements TicketService {
         Long cardId = ticket.getCardId();
         Card card = cardService.get(cardId).get();
         if (unblock) {
-            card.setStatus(UserCardStatus.ACTIVE);
-            ticket.setStatus(TicketStatus.APPROVED);
+            card.setActivityStatusId((long) ActivityStatus.valueOf("ACTIVE").ordinal());
+            ticket.setTicketStatusId((long) TicketStatus.valueOf("APPROVED").ordinal());
         } else {
-            card.setStatus(UserCardStatus.BLOCKED);
-            ticket.setStatus(TicketStatus.DECLINED);
+            card.setActivityStatusId((long) ActivityStatus.valueOf("BLOCKED").ordinal());
+            ticket.setTicketStatusId((long) TicketStatus.valueOf("DECLINED").ordinal());
         }
         update(ticket);
         cardService.update(card);

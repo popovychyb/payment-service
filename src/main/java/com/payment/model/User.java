@@ -1,8 +1,7 @@
 package com.payment.model;
 
+import com.payment.model.enums.ActivityStatus;
 import com.payment.model.enums.Role;
-import com.payment.model.enums.UserCardStatus;
-import java.time.LocalDateTime;
 
 public class User {
     private Long id;
@@ -10,18 +9,16 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private Role role;
-    private UserCardStatus status;
-    private LocalDateTime createTime;
+    private Long roleId;
+    private Long activityStatusId;
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.role = Role.USER;
-        this.status = UserCardStatus.ACTIVE;
-        this.createTime = LocalDateTime.now();
+        this.roleId = (long) Role.valueOf("CLIENT").ordinal();
+        this.activityStatusId = (long) ActivityStatus.valueOf("ACTIVE").ordinal();
     }
 
     public Long getId() {
@@ -64,28 +61,20 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
-    public LocalDateTime getCreateTime() {
-        return createTime;
+    public Long getActivityStatusId() {
+        return activityStatusId;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public UserCardStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(UserCardStatus status) {
-        this.status = status;
+    public void setActivityStatusId(Long activityStatusId) {
+        this.activityStatusId = activityStatusId;
     }
 
     @Override
@@ -96,8 +85,8 @@ public class User {
                 + ", lastName='" + lastName + '\''
                 + ", email='" + email + '\''
                 + ", password='" + password + '\''
-                + ", role=" + role
-                + ", status=" + status
-                + ", createTime=" + createTime + '}';
+                + ", role=" + roleId
+                + ", activityStatusId=" + activityStatusId
+                + '}';
     }
 }

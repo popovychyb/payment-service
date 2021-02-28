@@ -1,16 +1,15 @@
 package com.payment.service.impl;
 
 import com.payment.dao.UserDao;
-import com.payment.dao.impl.UserDaoImpl;
+import com.payment.dao.jdbs.UserDaoJdbc;
 import com.payment.model.User;
-import com.payment.model.enums.Role;
-import com.payment.model.enums.UserCardStatus;
+import com.payment.model.enums.ActivityStatus;
 import com.payment.service.UserService;
 import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
-    private final UserDao userDao = new UserDaoImpl();
+    private final UserDao userDao = new UserDaoJdbc();
 
     @Override
     public User create(User user) {
@@ -40,21 +39,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void blockUser(Long id) {
         User user = userDao.get(id).get();
-        user.setStatus(UserCardStatus.BLOCKED);
+        user.setActivityStatusId((long) ActivityStatus.valueOf("BLOCKED").ordinal());
         update(user);
     }
 
     @Override
     public void unblockUser(Long id) {
         User user = userDao.get(id).get();
-        user.setStatus(UserCardStatus.ACTIVE);
+        user.setActivityStatusId((long) ActivityStatus.valueOf("ACTIVE").ordinal());
         update(user);
     }
 
     @Override
-    public void raiseToAdmin(Long id) {
-        User user = userDao.get(id).get();
-        user.setRole(Role.ADMIN);
-        update(user);
+    public Optional<User> findByEmail(String email) {
+        return userDao.findByEmail(email);
     }
 }
