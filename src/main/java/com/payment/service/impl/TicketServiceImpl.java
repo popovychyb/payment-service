@@ -58,4 +58,9 @@ public class TicketServiceImpl implements TicketService {
         update(ticket);
         cardService.update(card);
     }
+
+    @Override
+    public List<Ticket> getUserTickets(Long id) {
+        return ticketDao.getUserTickets(id);
+    }
 }

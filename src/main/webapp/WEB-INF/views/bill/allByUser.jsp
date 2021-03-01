@@ -9,7 +9,7 @@
 </head>
 <body class="container">
 <jsp:include page="../menu.jsp"/>
-<h1>All bills</h1>
+<h1>My bills</h1>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -18,7 +18,6 @@
         <th>Recipient Card Id</th>
         <th>Payment</th>
         <th>Bill Status</th>
-        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -48,10 +47,6 @@
                         <c:out value="REJECTED"/>
                     </c:otherwise>
                 </c:choose>
-            </td>
-            <td>
-                <a href="${pageContext.request.contextPath}/bill/delete?id=${bill.id}">
-                    Delete</a>
             </td>
         </tr>
     </c:forEach>

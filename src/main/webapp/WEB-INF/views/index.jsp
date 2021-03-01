@@ -1,26 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
     <title>Payment service</title>
 </head>
-<body>
-<h1>Hello world!</h1>
-<p>Current time is: ${time}</p>
-<br>
-<a href="${pageContext.request.contextPath}/inject">Inject test data into the DB</a>
-<br>
-<a href="${pageContext.request.contextPath}/registration">registration</a>
-<br>
-<a href="${pageContext.request.contextPath}/login">login</a>
-<br>
-<a href="${pageContext.request.contextPath}/logout">logout</a>
-<br>
-<a href="${pageContext.request.contextPath}/user/all">user/all</a>
-<br>
-<a href="${pageContext.request.contextPath}/card/all">card/all</a>
-<br>
-<a href="${pageContext.request.contextPath}/bill/all">bill/all</a>
-<br>
-<a href="${pageContext.request.contextPath}/ticket/all">ticket/all</a>
+<body class="container">
+<jsp:include page="menu.jsp"/>
+<h1>Welcome to payment service!</h1>
 </body>
 </html>

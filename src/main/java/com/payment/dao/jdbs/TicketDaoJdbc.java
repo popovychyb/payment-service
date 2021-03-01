@@ -103,4 +103,24 @@ public class TicketDaoJdbc implements TicketDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<Ticket> getUserTickets(Long id) {
+        String selectUserTicketsQuery = "SELECT * FROM tickets WHERE card_id IN "
+                + "(SELECT id FROM cards WHERE users_id = ?);";
+        try (Connection conn = ConnectionUtil.getConnection();
+                PreparedStatement statement = conn.prepareStatement(selectUserTicketsQuery)) {
+            statement.setLong(1, id);
+            List<Ticket> tickets = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery();
+            Ticket ticket = null;
+            while (resultSet.next()) {
+                ticket = getTicketFromResultSet(resultSet).get();
+                tickets.add(ticket);
+            }
+            return tickets;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

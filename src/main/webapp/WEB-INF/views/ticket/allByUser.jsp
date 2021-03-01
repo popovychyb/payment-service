@@ -9,14 +9,13 @@
 </head>
 <body class="container">
 <jsp:include page="../menu.jsp"/>
-<h1>All tickets</h1>
+<h1>My tickets</h1>
 <table class="table table-striped">
     <thead>
     <tr>
         <th>Id</th>
         <th>CardId</th>
         <th>Ticket Status</th>
-        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -40,10 +39,6 @@
                         <c:out value="DECLINED"/>
                     </c:otherwise>
                 </c:choose>
-            </td>
-            <td>
-                <a href="${pageContext.request.contextPath}/ticket/delete?id=${ticket.id}">
-                    Delete</a>
             </td>
         </tr>
     </c:forEach>

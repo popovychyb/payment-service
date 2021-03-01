@@ -5,52 +5,57 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
-    <title>All bills</title>
+    <title>User Cards</title>
 </head>
 <body class="container">
 <jsp:include page="../menu.jsp"/>
-<h1>All bills</h1>
+<h1>My cards</h1>
 <table class="table table-striped">
     <thead>
     <tr>
         <th>Id</th>
-        <th>Sender Card Id</th>
-        <th>Recipient Card Id</th>
-        <th>Payment</th>
-        <th>Bill Status</th>
+        <th>Number</th>
+        <th>Balance</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Block</th>
         <th>Delete</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="bill" items="${bills}">
+    <c:forEach var="card" items="${cards}">
         <tr>
             <td>
-                <c:out value="${bill.id}"/>
+                <c:out value="${card.id}"/>
             </td>
             <td>
-                <c:out value="${bill.senderCardId}"/>
+                <c:out value="${card.number}"/>
             </td>
             <td>
-                <c:out value="${bill.recipientCardId}"/>
+                <c:out value="${card.balance}"/>
             </td>
             <td>
-                <c:out value="${bill.payment}"/>
+                <c:out value="${card.title}"/>
             </td>
             <td>
                 <c:choose>
-                    <c:when test="${bill.billStatusId == 0}">
-                        <c:out value="PREPARED"/>
+                    <c:when test="${card.activityStatusId == 0}">
+                        <c:out value="ACTIVE"/>
                     </c:when>
-                    <c:when test="${bill.billStatusId == 1}">
-                        <c:out value="SENT"/>
+                    <c:when test="${card.activityStatusId == 1}">
+                        <c:out value="BLOCKED"/>
                     </c:when>
                     <c:otherwise>
-                        <c:out value="REJECTED"/>
+                        <c:out value="CONSIDERATION"/>
                     </c:otherwise>
                 </c:choose>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/bill/delete?id=${bill.id}">
+                <a href="${pageContext.request.contextPath}/card/block?id=${card.id}">
+                    Block/Unblock</a>
+            </td>
+            <td>
+                <a href="${pageContext.request.contextPath}/card/delete?id=${card.id}">
                     Delete</a>
             </td>
         </tr>

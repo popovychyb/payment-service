@@ -9,4 +9,6 @@ public interface BillDao extends GenericDao<Bill, Long> {
     List<Bill> getBillsByRecipientAccount(Long id);
 
     List<Bill> getBillsByAccount(Long id);
+
+    List<Bill> getUserBills(Long id);
 }

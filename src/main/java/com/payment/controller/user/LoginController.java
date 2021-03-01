@@ -33,6 +33,7 @@ public class LoginController extends HttpServlet {
             User user = authService.login(email, password);
             HttpSession session = req.getSession();
             session.setAttribute("user_id", user.getId());
+            session.setAttribute("user_role_id", user.getRoleId());
         } catch (AuthenticationException e) {
             req.setAttribute("errorMsg", e.getMessage());
             req.getRequestDispatcher("/WEB-INF/views/user/login.jsp")

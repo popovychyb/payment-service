@@ -74,6 +74,28 @@ public class BillDaoJdbc implements BillDao {
     }
 
     @Override
+    public List<Bill> getUserBills(Long id) {
+        String selectUserBillsQuery = "SELECT * FROM bills "
+                + "WHERE (sender_card_id IN (SELECT id FROM cards WHERE users_id = ?) "
+                + "OR (recipient_card_id IN (SELECT id FROM cards WHERE users_id = ?)));";
+        try (Connection conn = ConnectionUtil.getConnection();
+                PreparedStatement statement = conn.prepareStatement(selectUserBillsQuery)) {
+            statement.setLong(1, id);
+            statement.setLong(2, id);
+            List<Bill> bills = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery();
+            Bill bill = null;
+            while (resultSet.next()) {
+                bill = getBillsFromResultSet(resultSet).get();
+                bills.add(bill);
+            }
+            return bills;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public Bill create(Bill bill) {
         String query =
                 "INSERT INTO bills (sender_card_id, recipient_card_id, "

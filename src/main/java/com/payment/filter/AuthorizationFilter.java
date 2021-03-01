@@ -30,6 +30,9 @@ public class AuthorizationFilter implements Filter {
         protectedUrls.put("/ticket/all", List.of(Role.ADMIN));
         protectedUrls.put("/bill/all", List.of(Role.ADMIN));
         protectedUrls.put("/card/all", List.of(Role.ADMIN));
+
+        protectedUrls.put("/card/allByUser", List.of(Role.CLIENT));
+        protectedUrls.put("/ticket/allByUser", List.of(Role.CLIENT));
     }
 
     @Override
