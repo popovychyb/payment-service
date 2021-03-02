@@ -6,24 +6,27 @@
           crossorigin="anonymous">
     <title>Login page</title>
 </head>
-<body class="container">
-<h1>Login page</h1>
-
-<h4 style="color:red">${errorMsg}</h4>
-
-<form action="${pageContext.request.contextPath}/login" method="post">
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" class="form-control">
+<body class="h-100">
+<div class="container h-50">
+    <div class="row h-100 justify-content-center align-items-center">
+        <form action="${pageContext.request.contextPath}/login" method="post">
+            <h1 class="display-4">Login page</h1>
+            <h4 style="color:#ff0000">${errorMsg}</h4>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="pwd" id="password" class="form-control">
+            </div>
+            <div class="btn-group mt-1">
+                <a href="${pageContext.request.contextPath}/registration"
+                   class="btn btn-outline-secondary">Registration</a>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" name="pwd" id="password" class="form-control">
-    </div>
-    <div class="btn-group mt-1">
-        <a href="${pageContext.request.contextPath}/registration" class="btn btn-outline-secondary">Registration</a>
-        <button type="submit" class="btn btn-primary">Login</button>
-    </div>
-</form>
+</div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.payment.model.enums.BillStatus" %>
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -37,17 +38,7 @@
                 <c:out value="${bill.payment}"/>
             </td>
             <td>
-                <c:choose>
-                    <c:when test="${bill.billStatusId == 0}">
-                        <c:out value="PREPARED"/>
-                    </c:when>
-                    <c:when test="${bill.billStatusId == 1}">
-                        <c:out value="SENT"/>
-                    </c:when>
-                    <c:otherwise>
-                        <c:out value="REJECTED"/>
-                    </c:otherwise>
-                </c:choose>
+                <c:out value="${BillStatus.getBillStatus(bill)}"/>
             </td>
             <td>
                 <a href="${pageContext.request.contextPath}/bill/delete?id=${bill.id}">

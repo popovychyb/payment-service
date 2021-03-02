@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.payment.model.enums.TicketStatus" %>
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -16,6 +17,7 @@
         <th>Id</th>
         <th>CardId</th>
         <th>Ticket Status</th>
+        <th>Consider</th>
         <th>Delete</th>
     </tr>
     </thead>
@@ -29,17 +31,13 @@
                 <c:out value="${ticket.cardId}"/>
             </td>
             <td>
-                <c:choose>
-                    <c:when test="${ticket.ticketStatusId == 0}">
-                        <c:out value="NEW"/>
-                    </c:when>
-                    <c:when test="${ticket.ticketStatusId == 1}">
-                        <c:out value="APPROVED"/>
-                    </c:when>
-                    <c:otherwise>
-                        <c:out value="DECLINED"/>
-                    </c:otherwise>
-                </c:choose>
+                <c:out value="${TicketStatus.getTicketStatus(ticket)}"/>
+            </td>
+            <td>
+                <a href="${pageContext.request.contextPath}/ticket/decline?id=${ticket.id}">
+                    Decline </a>
+                <a href="${pageContext.request.contextPath}/ticket/approve?id=${ticket.id}">
+                    Approve</a>
             </td>
             <td>
                 <a href="${pageContext.request.contextPath}/ticket/delete?id=${ticket.id}">

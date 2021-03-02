@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.payment.model.enums.Role" %>
+<%@ page import="com.payment.model.enums.ActivityStatus" %>
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -39,27 +41,10 @@
                 <c:out value="${user.email}"/>
             </td>
             <td>
-                <c:choose>
-                    <c:when test="${user.roleId == 0}">
-                        <c:out value="ADMIN"/>
-                    </c:when>
-                    <c:otherwise>
-                        <c:out value="USER"/>
-                    </c:otherwise>
-                </c:choose>
+                <c:out value="${Role.getRole(user)}"/>
             </td>
             <td>
-                <c:choose>
-                    <c:when test="${user.activityStatusId == 0}">
-                        <c:out value="ACTIVE"/>
-                    </c:when>
-                    <c:when test="${user.activityStatusId == 1}">
-                        <c:out value="BLOCKED"/>
-                    </c:when>
-                    <c:otherwise>
-                        <c:out value="CONSIDERATION"/>
-                    </c:otherwise>
-                </c:choose>
+                <c:out value="${ActivityStatus.getActivityStatus(user)}"/>
             </td>
             <td>
                 <a href="${pageContext.request.contextPath}/user/block?id=${user.id}">
