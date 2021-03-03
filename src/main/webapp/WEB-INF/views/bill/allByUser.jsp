@@ -10,7 +10,7 @@
 </head>
 <body class="container">
 <jsp:include page="../menu.jsp"/>
-<h1>All bills</h1>
+<h1>My bills</h1>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -19,7 +19,7 @@
         <th>Recipient Card Id</th>
         <th>Payment</th>
         <th>Bill Status</th>
-        <th>Delete</th>
+        <th>Pay</th>
     </tr>
     </thead>
     <tbody>
@@ -41,8 +41,14 @@
                 <c:out value="${BillStatus.getBillStatus(bill)}"/>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/bill/delete?id=${bill.id}">
-                    Delete</a>
+                <c:choose>
+                    <c:when test="${BillStatus.getBillStatus(bill) == BillStatus.PREPARED}">
+                        <a href="${pageContext.request.contextPath}/bill/pay?id=${bill.id}">Pay</a>
+                    </c:when>
+                    <c:otherwise>
+                        <c:out value="-"/>
+                    </c:otherwise>
+                </c:choose>
             </td>
         </tr>
     </c:forEach>

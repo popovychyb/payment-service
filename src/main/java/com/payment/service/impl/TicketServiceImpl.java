@@ -58,4 +58,29 @@ public class TicketServiceImpl implements TicketService {
         update(ticket);
         cardService.update(card);
     }
+
+    @Override
+    public List<Ticket> getUserTickets(Long id) {
+        return ticketDao.getUserTickets(id);
+    }
+
+    @Override
+    public void decline(Long id) {
+        Ticket ticket = ticketDao.get(id).get();
+        ticket.setTicketStatusId(2L);
+        Card card = cardService.get(ticket.getCardId()).get();
+        card.setActivityStatusId(1L);
+        cardService.update(card);
+        ticketDao.update(ticket);
+    }
+
+    @Override
+    public void approve(Long id) {
+        Ticket ticket = ticketDao.get(id).get();
+        ticket.setTicketStatusId(1L);
+        Card card = cardService.get(ticket.getCardId()).get();
+        card.setActivityStatusId(0L);
+        cardService.update(card);
+        ticketDao.update(ticket);
+    }
 }

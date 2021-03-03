@@ -9,19 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/card/delete")
-public class DeleteCardController extends HttpServlet {
+@WebServlet("/card/allByUser")
+public class ShowAllUserCardsController extends HttpServlet {
     private final CardService cardService = new CardServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Long id = Long.valueOf(req.getParameter("id"));
-        cardService.delete(id);
-        if ((Long) req.getSession().getAttribute("user_role_id") == 0) {
-            resp.sendRedirect(req.getContextPath() + "/card/all");
-        } else {
-            resp.sendRedirect(req.getContextPath() + "/card/allByUser");
-        }
+        Long userId = (Long) req.getSession().getAttribute("user_id");
+        req.setAttribute("cards", cardService.getUserCards(userId));
+        req.getRequestDispatcher("/WEB-INF/views/card/allByUser.jsp").forward(req, resp);
     }
 }

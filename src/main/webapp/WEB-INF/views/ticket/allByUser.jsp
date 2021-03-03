@@ -10,15 +10,13 @@
 </head>
 <body class="container">
 <jsp:include page="../menu.jsp"/>
-<h1>All tickets</h1>
+<h1>My tickets</h1>
 <table class="table table-striped">
     <thead>
     <tr>
         <th>Id</th>
         <th>CardId</th>
         <th>Ticket Status</th>
-        <th>Consider</th>
-        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -32,16 +30,6 @@
             </td>
             <td>
                 <c:out value="${TicketStatus.getTicketStatus(ticket)}"/>
-            </td>
-            <td>
-                <a href="${pageContext.request.contextPath}/ticket/decline?id=${ticket.id}">
-                    Decline </a>
-                <a href="${pageContext.request.contextPath}/ticket/approve?id=${ticket.id}">
-                    Approve</a>
-            </td>
-            <td>
-                <a href="${pageContext.request.contextPath}/ticket/delete?id=${ticket.id}">
-                    Delete</a>
             </td>
         </tr>
     </c:forEach>

@@ -6,21 +6,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
-    <title>All cards</title>
+    <title>User Cards</title>
 </head>
 <body class="container">
 <jsp:include page="../menu.jsp"/>
-<h1>All cards</h1>
+<h1>My cards</h1>
 <table class="table table-striped">
     <thead>
     <tr>
         <th>Id</th>
         <th>Number</th>
-        <th>IdUser</th>
         <th>Balance</th>
         <th>Title</th>
         <th>Status</th>
-        <th>Block/Unblock</th>
+        <th>Block</th>
         <th>Delete</th>
     </tr>
     </thead>
@@ -32,9 +31,6 @@
             </td>
             <td>
                 <c:out value="${card.number}"/>
-            </td>
-            <td>
-                <c:out value="${card.idUser}"/>
             </td>
             <td>
                 <c:out value="${card.balance}"/>
@@ -50,8 +46,11 @@
                     <c:when test="${ActivityStatus.getActivityStatus(card) == ActivityStatus.ACTIVE}">
                         <a href="${pageContext.request.contextPath}/card/block?id=${card.id}">Block</a>
                     </c:when>
+                    <c:when test="${ActivityStatus.getActivityStatus(card) == ActivityStatus.CONSIDERATION}">
+                        Request sent
+                    </c:when>
                     <c:otherwise>
-                        <a href="${pageContext.request.contextPath}/card/unblock?id=${card.id}">Unblock</a>
+                        <a href="${pageContext.request.contextPath}/ticket/create?id=${card.id}">Request unblock</a>
                     </c:otherwise>
                 </c:choose>
             </td>

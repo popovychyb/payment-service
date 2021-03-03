@@ -61,6 +61,11 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
+    public List<Bill> getUserBills(Long id) {
+        return billDao.getUserBills(id);
+    }
+
+    @Override
     public Bill update(Bill bill) {
         return billDao.update(bill);
     }
