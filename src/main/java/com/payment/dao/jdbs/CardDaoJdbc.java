@@ -34,6 +34,22 @@ public class CardDaoJdbc implements CardDao {
     }
 
     @Override
+    public Optional<Card> getByNumber(String number) {
+        try (Connection conn = ConnectionUtil.getConnection()) {
+            String query = "SELECT * FROM cards WHERE card_number = ?;";
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, number);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return getCardFromResultSet(resultSet);
+            }
+            return Optional.empty();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public Card create(Card card) {
         String query = "INSERT INTO cards (card_number, users_id, balance, "
                 + "title, activity_status_id) VALUES (?, ?, ?, ?, ?);";

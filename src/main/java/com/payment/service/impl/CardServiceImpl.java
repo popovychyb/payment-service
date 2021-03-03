@@ -72,6 +72,11 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    public Optional<Card> getByNumber(String number) {
+        return cardDao.getByNumber(number);
+    }
+
+    @Override
     public Card update(Card card) {
         return cardDao.update(card);
     }

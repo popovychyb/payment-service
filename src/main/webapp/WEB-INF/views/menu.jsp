@@ -22,6 +22,8 @@
             <a href="${pageContext.request.contextPath}/ticket/allByUser" class="nav-link">Tickets</a>
             <br>
             <a href="${pageContext.request.contextPath}/bill/allByUser" class="nav-link">Bills</a>
+            <br>
+            <a href="${pageContext.request.contextPath}/bill/new" class="nav-link">Make payment</a>
         </c:otherwise>
     </c:choose>
     <br>

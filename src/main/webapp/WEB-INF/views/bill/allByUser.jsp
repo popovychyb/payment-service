@@ -19,6 +19,7 @@
         <th>Recipient Card Id</th>
         <th>Payment</th>
         <th>Bill Status</th>
+        <th>Pay</th>
     </tr>
     </thead>
     <tbody>
@@ -38,6 +39,16 @@
             </td>
             <td>
                 <c:out value="${BillStatus.getBillStatus(bill)}"/>
+            </td>
+            <td>
+                <c:choose>
+                    <c:when test="${BillStatus.getBillStatus(bill) == BillStatus.PREPARED}">
+                        <a href="${pageContext.request.contextPath}/bill/pay?id=${bill.id}">Pay</a>
+                    </c:when>
+                    <c:otherwise>
+                        <c:out value="-"/>
+                    </c:otherwise>
+                </c:choose>
             </td>
         </tr>
     </c:forEach>
